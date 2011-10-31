@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+   <color name="opaque_red">#f00</color>
+   <color name="translucent_red">#80ff0000</color>
+   
+   <bool name="screen_small">true</bool>
+   <dimen name="font_size">16sp</dimen>
+   <integer name="max_speed">75</integer>
+    
+    <string-array name="numbers">
+        <item>one</item>
+        <item>two</item>
+        <item>three</item>
+    </string-array>
+    
+    <array name="icons">
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+    </array>
+    
+    <integer-array name="integers">
+        <item>0</item>
+        <item>1</item>
+    </integer-array>
+
+</resources>

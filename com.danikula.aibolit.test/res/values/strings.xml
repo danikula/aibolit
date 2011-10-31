@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aibolit</string>
+    <string name="menu_classic">Classic Activity</string>
+    <string name="menu_aibolit">Aibolit Activity</string>
+    <string name="menu_test">Test Activity</string>
+    <string name="send">Send</string>
+    <string name="clear">Clear</string>
+    <string name="symbols_count">Symbols count: %s</string>
+</resources>
