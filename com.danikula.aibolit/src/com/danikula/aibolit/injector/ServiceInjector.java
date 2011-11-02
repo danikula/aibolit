@@ -12,7 +12,7 @@ import com.danikula.aibolit.annotation.InjectService;
 
 /**
  * Injects application service. Client code have to add custom {@link ServicesResolver} with help method
- * {@link Aibolit#addInjectionResolver(ServicesResolver)}
+ * {@link Aibolit#addServicesResolver(ServicesResolver)}
  * 
  * @author Alexey Danilov
  * 

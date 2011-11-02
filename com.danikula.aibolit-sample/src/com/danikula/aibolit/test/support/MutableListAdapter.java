@@ -1,4 +1,4 @@
-package com.danikula.aibolit.test.supprt;
+package com.danikula.aibolit.test.support;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -17,8 +17,8 @@ import com.danikula.aibolit.annotation.InjectOnClickListener;
 import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
 import com.danikula.aibolit.annotation.InjectResource;
 import com.danikula.aibolit.annotation.InjectView;
-import com.danikula.aibolit.test.supprt.Message;
-import com.danikula.aibolit.test.supprt.MutableListAdapter;
+import com.danikula.aibolit.test.support.Message;
+import com.danikula.aibolit.test.support.MutableListAdapter;
 
 public class AibolitChatActivity extends Activity {
 

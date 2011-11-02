@@ -68,7 +68,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * <pre>
  * public class AibolitChatActivity extends Activity {
  * 
- *     // annotate injected fileds ...
+ *     // annotate fields to be injected...
  *     
  *     &#064;InjectView(R.id.messageEditText)
  *     private EditText messageEditText;
@@ -78,6 +78,12 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * 
  *     &#064;InjectResource(R.string.symbols_count)
  *     private String symbolsCountPattern;
+ *     
+ *     &#064;InjectSystemService(Context.NOTIFICATION_SERVICE)
+ *     private NotificationManager notificationManager;
+ *     
+ *     &#064;InjectService
+ *     private HttpManager httpManager;
  *     
  *     ...
  * 
@@ -98,13 +104,12 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *     
  *     &#064;InjectOnClickListener(R.id.sendButton)
  *     private void onSendButtonClick(View v) {
- *         String text = messageEditText.getText().toString();
- *         // do work with text
+ *         // handle onClick event
  *     }
  * 
  *     &#064;InjectOnClickListener(R.id.clearHistoryButton)
  *     private void onClearHistoryButtonClick(View v) {
- *         // handle button click
+ *         // handle onClick event
  *     }
  * 
  *     &#064;InjectOnTextChangedListener(R.id.messageEditText)
@@ -117,7 +122,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * }
  * </pre>
  * <p>
- * Aibolit allows to add custom injecting resolver with help method {@link #addInjectionResolver(ServicesResolver)}. It helps to
+ * Aibolit allows to add custom services resolver with help method {@link #addServicesResolver(ServicesResolver)}. It helps to
  * inject custom application services.
  * </p>
  * Typical usage:
@@ -134,16 +139,20 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *         Aibolit.addInjectionResolver(this);
  *     }
  *     
- *     // resolve aplication service
+ *     // resolve application service
  *     &#064;Override
  *     public Object resolve(Class<?> serviceClass) {
  *         Object service = null;
  *         if (HttpManager.class.isAssignableFrom(serviceClass)) {
- *             service = httpService;
+ *             service = getHttpManager();
+ *         }else if (...) { // resolve another custom services
+ *             // service = ... 
+ *         } else {
+ *             throw new IllegalArgumentException("Impossible to resolve service with class " + serviceClass.getClass().getName());
  *         }
- *         // else if (...) {...} resolve all custom services
  *         return service;
  *     }
+ * 
  *     ...
  * }
  * 
@@ -167,8 +176,8 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * 
  * </pre>
  * 
- * Note: If superclass also should be injected just annotate your class with {@link AibolitSettings} annotattion with parameter
- * {@link AibolitSettings#injectSuperclasses()} setted to <code>true</code>
+ * Note: If superclass also should be injected just annotate your class with {@link AibolitSettings} annotation with parameter
+ * {@link AibolitSettings#injectSuperclasses()} equal to <code>true</code>
  * 
  * @author Alexey Danilov
  * 
@@ -176,9 +185,9 @@ import com.danikula.aibolit.injector.InjectorRegister;
 public class Aibolit {
 
     /**
-     * Injects all fields and methods marked by injection anotations in object.
+     * Injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param activity Activity an activity to be processed and which content will be used for resolving injections, can't be
@@ -192,9 +201,9 @@ public class Aibolit {
     }
 
     /**
-     * Injects all fields and methods marked by injection anotations in object.
+     * Injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param dialog Dialog dialog to be processed and which content will be used for resolving injections, can't be
@@ -208,9 +217,9 @@ public class Aibolit {
     }
 
     /**
-     * Injects all fields and methods marked by injection anotations in object.
+     * Injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param view View view to be processed and that will be used for resolving injections, can't be <code>null</code>
@@ -223,9 +232,9 @@ public class Aibolit {
     }
 
     /**
-     * Inject all fields and methods marked by injection anotations in object.
+     * Inject all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param patient Object an object to be processed, can't be <code>null</code>
@@ -241,9 +250,9 @@ public class Aibolit {
     }
 
     /**
-     * Injects all fields and methods marked by injection anotations in object.
+     * Injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param patient Object an object to be processed, can't be <code>null</code>
@@ -256,9 +265,9 @@ public class Aibolit {
     }
 
     /**
-     * Injects all fields and methods marked by injection anotations in object.
+     * Injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * Note: this method is applicable only for injection fields in object without any visible presentation (Service,
@@ -275,9 +284,9 @@ public class Aibolit {
     }
 
     /**
-     * Sets content for specified activity and injects all fields and methods marked by injection anotations in object.
+     * Sets content for specified activity and injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param activity Activity an activity to be processed and which content will be used for resolving injections, can't be
@@ -292,9 +301,9 @@ public class Aibolit {
     }
 
     /**
-     * Sets content for specified activity and injects all fields and methods marked by injection anotations in object.
+     * Sets content for specified activity and injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param activity Activity an activity to be processed and which content will be used for resolving injections, can't be
@@ -309,9 +318,9 @@ public class Aibolit {
     }
 
     /**
-     * Sets content for specified dialog and injects all fields and methods marked by injection anotations in object.
+     * Sets content for specified dialog and injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param dialog Dialog a dialog to be processed and which content will be used for resolving injections, can't be
@@ -326,9 +335,9 @@ public class Aibolit {
     }
 
     /**
-     * Sets content for specified dialog and injects all fields and methods marked by injection anotations in object.
+     * Sets content for specified dialog and injects all fields and methods marked by injection annotations in object.
      * <p>
-     * See full list of injection anotations in docs for this class.
+     * See full list of injection annotations in javadoc for this class.
      * </p>
      * 
      * @param dialog Dialog a dialog to be processed and which content will be used for resolving injections, can't be
@@ -347,7 +356,7 @@ public class Aibolit {
      * 
      * @param injectionResolver InjectionResolver resolver to be used for resolving concrete service by class
      */
-    public static void addInjectionResolver(ServicesResolver injectionResolver) {
+    public static void addServicesResolver(ServicesResolver injectionResolver) {
         InjectorRegister.addServicesResolver(injectionResolver);
     }
 

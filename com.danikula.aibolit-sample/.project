@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>com.danikula.aibolit.test</name>
+	<name>com.danikula.aibolit-sample</name>
 	<comment></comment>
 	<projects>
 		<project>com.danikula.android.aibolit</project>
