@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link View.OnFocusChangeListener#onFocusChange(View, boolean)} method for specified
+ * Anotation is used for injecting {@link OnFocusChangeListener#onFocusChange(View, boolean)} method for specified
  * {@link View}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -27,7 +28,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see View.OnFocusChangeListener
+ * @see OnFocusChangeListener
  * 
  * @author Alexey Danilov
  * 

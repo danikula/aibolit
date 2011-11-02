@@ -7,11 +7,12 @@ import java.lang.annotation.Target;
 
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link AdapterView.OnItemSelectedListener#onItemSelected(AdapterView, View, int, long)} method
+ * Anotation is used for injecting {@link OnItemSelectedListener#onItemSelected(AdapterView, View, int, long)} method
  * for specified {@link AdapterView}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -27,7 +28,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see AdapterView.OnItemSelectedListener
+ * @see OnItemSelectedListener
  * 
  * @author Alexey Danilov
  * 

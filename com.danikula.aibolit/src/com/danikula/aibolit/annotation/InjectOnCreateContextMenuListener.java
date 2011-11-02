@@ -6,12 +6,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
  * Anotation is used for injecting
- * {@link View.OnCreateContextMenuListener#onCreateContextMenu(android.view.ContextMenu, View, android.view.ContextMenu.ContextMenuInfo)}
+ * {@link OnCreateContextMenuListener#onCreateContextMenu(android.view.ContextMenu, View, android.view.ContextMenu.ContextMenuInfo)}
  * method for specified {@link View}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -28,7 +29,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see View.OnCreateContextMenuListener
+ * @see OnCreateContextMenuListener
  * 
  * @author Alexey Danilov
  * 

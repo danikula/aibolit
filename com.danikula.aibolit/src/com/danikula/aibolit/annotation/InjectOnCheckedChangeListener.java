@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link CompoundButton.OnCheckedChangeListener#onCheckedChanged(CompoundButton, boolean)} method
+ * Anotation is used for injecting {@link OnCheckedChangeListener#onCheckedChanged(CompoundButton, boolean)} method
  * for specified {@link CompoundButton}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -27,7 +28,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see CompoundButton.OnCheckedChangeListener
+ * @see OnCheckedChangeListener
  * 
  * @author Alexey Danilov
  * 

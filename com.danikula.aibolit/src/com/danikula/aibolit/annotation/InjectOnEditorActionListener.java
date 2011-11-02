@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link TextView.OnEditorActionListener#onEditorAction(TextView, int, android.view.KeyEvent)}
+ * Anotation is used for injecting {@link OnEditorActionListener#onEditorAction(TextView, int, android.view.KeyEvent)}
  * method for specified {@link TextView}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -28,7 +29,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see TextView.OnEditorActionListener
+ * @see OnEditorActionListener
  * 
  * @author Alexey Danilov
  * 

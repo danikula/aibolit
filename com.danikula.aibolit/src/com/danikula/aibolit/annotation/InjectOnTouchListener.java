@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.view.View;
+import android.view.View.OnTouchListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link View.OnTouchListener#onTouch(View, android.view.MotionEvent)} method for specified view.
+ * Anotation is used for injecting {@link OnTouchListener#onTouch(View, android.view.MotionEvent)} method for specified view.
  * See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -25,7 +26,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see View.OnTouchListener
+ * @see OnTouchListener
  * 
  * @author Alexey Danilov
  * 

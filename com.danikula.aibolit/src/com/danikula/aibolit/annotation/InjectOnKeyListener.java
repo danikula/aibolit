@@ -6,11 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.view.View;
+import android.view.View.OnKeyListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link View.OnKeyListener#onKey(View, int, android.view.KeyEvent)} method for specified view.
+ * Anotation is used for injecting {@link OnKeyListener#onKey(View, int, android.view.KeyEvent)} method for specified view.
  * See docs for {@link Aibolit} for more information.
  * 
  * <p>
@@ -27,7 +28,7 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see View.OnKeyListener
+ * @see OnKeyListener
  * 
  * @author Alexey Danilov
  * 
