@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.danikula.aibolit.test.supprt.Message;
-import com.danikula.aibolit.test.supprt.MutableListAdapter;
+import com.danikula.aibolit.test.support.Message;
+import com.danikula.aibolit.test.support.MutableListAdapter;
 
 public class ClassicChatActivity extends Activity {
 

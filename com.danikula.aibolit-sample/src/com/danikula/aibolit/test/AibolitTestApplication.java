@@ -13,7 +13,7 @@ public class AibolitTestApplication extends Application implements ServicesResol
     public void onCreate() {
         super.onCreate();
         
-        Aibolit.addInjectionResolver(this);
+        Aibolit.addServicesResolver(this);
     }
     
     @Override

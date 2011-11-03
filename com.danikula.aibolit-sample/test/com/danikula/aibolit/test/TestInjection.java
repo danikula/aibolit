@@ -1,7 +1,5 @@
 package com.danikula.aibolit.test;
 
-import com.danikula.aibolit.Aibolit;
-
 import android.test.ActivityInstrumentationTestCase2;
 
 public class TestInjection extends ActivityInstrumentationTestCase2<TestInjectActivity> {
