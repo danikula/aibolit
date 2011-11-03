@@ -30,27 +30,27 @@ Example
     
         // annotate fields to be injected...
     
-        &#064;InjectView(R.id.messageEditText)
+        @InjectView(R.id.messageEditText)
         private EditText messageEditText;
     
-        &#064;InjectView(R.id.historyListView)
+        @InjectView(R.id.historyListView)
         private ListView historyListView;
     
-        &#064;InjectResource(R.string.symbols_count)
+        @InjectResource(R.string.symbols_count)
         private String symbolsCountPattern;
     
-        &#064;InjectSystemService(Context.NOTIFICATION_SERVICE)
+        @InjectSystemService(Context.NOTIFICATION_SERVICE)
         private NotificationManager notificationManager;
     
-        &#064;InjectService
+        @InjectService
         private HttpManager httpManager;
     
-        &#064;InjectResource(R.layout.content)
+        @InjectResource(R.layout.content)
         private View content;
     
         ...
     
-        &#064;Override
+        @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
     
@@ -65,17 +65,17 @@ Example
     
         // annotate event handlers... 
     
-        &#064;InjectOnClickListener(R.id.sendButton)
+        @InjectOnClickListener(R.id.sendButton)
         private void onSendButtonClick(View v) {
             // handle onClick event
         }
     
-        &#064;InjectOnClickListener(R.id.clearHistoryButton)
+        @InjectOnClickListener(R.id.clearHistoryButton)
         private void onClearHistoryButtonClick(View v) {
             // handle onClick event
         }
     
-        &#064;InjectOnTextChangedListener(R.id.messageEditText)
+        @InjectOnTextChangedListener(R.id.messageEditText)
         public void onMessageTextChanged(CharSequence s, int start, int before, int count) {
             // handle text changed event
         }
@@ -88,8 +88,9 @@ Example
 
 
 Developed By
-===========
+============
 Alexey Danilov - danikula@gmail.com
+
 
 
 
