@@ -84,6 +84,9 @@ Example
     
     }
 
+For more details [read documentation][1] or browse code
+
+
 
 
 
@@ -109,3 +112,8 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+
+
+
+ [1]: https://github.com/downloads/danikula/aibolit/javadoc-aibolit-0.1.zip
