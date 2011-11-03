@@ -8,11 +8,11 @@ Simple lightweight dependency injection implementation for Android
 
 Scope
 =====
-Injecting view by id
-Injecing application resource: array adapter, drawable, string, animation, boolean, integer, dimension, array, color 
-Inflating layout
-Injecting system services
-Injecting custom application services
+  1. Injecting view by id
+  2. Injecing application resource: array adapter, drawable, string, animation, boolean, integer, dimension, array, color 
+  3. Inflating layout
+  4. Injecting system services
+  5. Injecting custom application services
 
 
 
