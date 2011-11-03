@@ -93,7 +93,8 @@ For more details [read documentation][1] or browse code
 Developed By
 ============
 Alexey Danilov - danikula@gmail.com
-If you decide to use Aibolit in your project, please, notify me about it :) I’d love to see how widely it is being used.
+
+If you decide to use Aibolit in your project, please, notify me about it :) I'd love to see how widely it is being used.
 
 
 
