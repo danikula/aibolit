@@ -3,6 +3,7 @@ Aibolit
 
 Simple lightweight dependency injection implementation for Android
 
+![Aibolit logo][2]
 
 
 
@@ -118,3 +119,4 @@ License
 
 
  [1]: https://github.com/downloads/danikula/aibolit/javadoc-aibolit-0.1.zip
+ [2]: https://github.com/downloads/danikula/aibolit/aibolit-logo.png
