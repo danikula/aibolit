@@ -22,7 +22,7 @@ import android.widget.ArrayAdapter;
 
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectArrayAdapter;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
 
 /**
  * Injects {@link ArrayAdapter}
@@ -30,10 +30,10 @@ import com.danikula.aibolit.annotation.InjectArrayAdapter;
  * @author Alexey Danilov
  *
  */
-/*package private*/class ArrayAdapterInjector extends AbstractFieldInjector<InjectArrayAdapter> {
+/*package private*/class ArrayAdapterInjector extends AbstractFieldInjector<StringArrayAdapter> {
 
     @Override
-    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, InjectArrayAdapter annotation) {
+    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, StringArrayAdapter annotation) {
         Context context = injectionContext.getAndroidContext();
         int layoutId = annotation.layoutId();
         int textArrayResourceId = annotation.textArrayResourceId();

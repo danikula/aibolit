@@ -20,42 +20,43 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting application application resource into field. See docs for {@link Aibolit} for more information.
- * Annotation is applicable for injecting drawable, string, anim, layout, bool, dimen, integer, array, color resources.
+ * Annotation is used for injecting {@link OnEditorActionListener#onEditorAction(TextView, int, android.view.KeyEvent)}
+ * method for specified {@link TextView}. See docs for {@link Aibolit} for more information.
+ * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectResource(R.anim.my_anim)
- * private Animation animation;
- * 
- * &#064;InjectResource(R.color.button_text)
- * private ColorStateList buttonText;
- * 
- * &#064;InjectResource(android.R.drawable.btn_default)
- * private Drawable drawable;
- * 
- * &#064;InjectResource(android.R.layout.simple_expandable_list_item_2)
- * private View view;
+ * &#064;OnEditorAction(R.id.editText)
+ * boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+ *     // process event
+ *     return false;
+ * }
  * 
  * </pre>
  * 
  * </p>
  * 
  * @see Aibolit
+ * @see OnEditorActionListener
+ * 
  * @author Alexey Danilov
  * 
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectResource {
+public @interface OnEditorAction {
+
     /**
-     * Returns identifier of resource
+     * Returns identifier of view to be used for setting listener
      * 
-     * @return int resource's id
+     * @return int view id. View must be instance of {@link TextView}
      */
     int value();
 

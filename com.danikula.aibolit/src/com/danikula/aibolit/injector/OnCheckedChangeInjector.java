@@ -22,7 +22,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnCheckedChangeListener;
+import com.danikula.aibolit.annotation.OnCheckedChange;
 
 /**
  * Injects {@link CompoundButton.OnCheckedChangeListener#onCheckedChanged(CompoundButton, boolean)} method
@@ -30,10 +30,10 @@ import com.danikula.aibolit.annotation.InjectOnCheckedChangeListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnCheckedChangeInjector extends AbstractMethodInjector<InjectOnCheckedChangeListener> {
+/* package private */class OnCheckedChangeInjector extends AbstractMethodInjector<OnCheckedChange> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnCheckedChangeListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnCheckedChange annotation) {
         Class<?>[] argsTypes = new Class<?>[] { CompoundButton.class, boolean.class };
         Method targetMethod = getMethod(OnCheckedChangeListener.class, "onCheckedChanged", argsTypes, sourceMethod);
         View view = getViewById(injectionContext.getRootView(), annotation.value());

@@ -20,37 +20,43 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import android.content.Context;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting system service into field. See docs for {@link Aibolit} for more information.
+ * Annotation is used for injecting {@link OnItemSelectedListener#onItemSelected(AdapterView, View, int, long)} method
+ * for specified {@link AdapterView}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectSystemService(Context.NOTIFICATION_SERVICE)
- * private NotificationManager notificationManager;
+ * &#064;OnItemSelected(R.id.listView)
+ * private void onListViewItemSelected(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+ *     // process event
+ * }
  * </pre>
  * 
  * </p>
  * 
  * @see Aibolit
+ * @see OnItemSelectedListener
  * 
  * @author Alexey Danilov
  * 
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectSystemService {
+public @interface OnItemSelected {
 
     /**
-     * Returns system service's name, such as {@link Context#WINDOW_SERVICE}
+     * Returns identifier of view to be used for setting listener
      * 
-     * @return String system's name
+     * @return int view id. View must be instance of {@link AdapterView}
      */
-    String value();
+    int value();
 
 }

@@ -20,46 +20,43 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link ArrayAdapter} using application resources. See docs for {@link Aibolit} for more
- * information.
+ * Annotation is used for injecting {@link OnCheckedChangeListener#onCheckedChanged(CompoundButton, boolean)} method
+ * for specified {@link CompoundButton}. See docs for {@link Aibolit} for more information.
+ * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectArrayAdapter(textArrayResourceId = R.array.numbers, layoutId = android.R.layout.simple_list_item_1)
- * private ArrayAdapter&lt;CharSequence&gt; adapter;
+ * &#064;OnCheckedChange(R.id.checkbox)
+ * private void onCheckedChanged(android.widget.CompoundButton arg0, boolean arg1) {
+ *     // process event
+ * }
  * 
  * </pre>
  * 
  * </p>
  * 
  * @see Aibolit
- * @see ArrayAdapter
+ * @see OnCheckedChangeListener
+ * 
  * @author Alexey Danilov
  * 
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectArrayAdapter {
+public @interface OnCheckedChange {
 
     /**
-     * Returns identifier of string array from resources
+     * Returns identifier of view to be used for setting listener
      * 
-     * @return int string array id
+     * @return int view id. View must be instance of {@link CompoundButton}
      */
-    int textArrayResourceId();
-
-    /**
-     * Returns identifier of layout to be inflated for {@link AdapterView} row
-     * 
-     * @return int layout id
-     */
-    int layoutId();
+    int value();
 
 }

@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnItemSelectedListener;
+import com.danikula.aibolit.annotation.OnItemSelected;
 
 /**
  * Injects {@link AdapterView.OnItemSelectedListener#onItemSelected(AdapterView, View, int, long) } method
@@ -30,10 +30,10 @@ import com.danikula.aibolit.annotation.InjectOnItemSelectedListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnItemSelectedListenerInjector extends AbstractMethodInjector<InjectOnItemSelectedListener> {
+/* package private */class OnItemSelectedListenerInjector extends AbstractMethodInjector<OnItemSelected> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnItemSelectedListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnItemSelected annotation) {
         Class<?>[] argsTypes = new Class<?>[] { AdapterView.class, View.class, int.class, long.class };
         Method targetMethod = getMethod(OnItemSelectedListener.class, "onItemSelected", argsTypes, sourceMethod);
         OnItemSelectedListener onItemSelectedListener = createInvokationProxy(OnItemSelectedListener.class, methodOwner,

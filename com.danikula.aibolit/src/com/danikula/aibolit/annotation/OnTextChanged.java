@@ -20,42 +20,41 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import android.view.View;
-import android.view.View.OnFocusChangeListener;
+import android.text.TextWatcher;
+import android.widget.TextView;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link OnFocusChangeListener#onFocusChange(View, boolean)} method for specified
- * {@link View}. See docs for {@link Aibolit} for more information.
+ * Annotation is used for injecting {@link TextWatcher#onTextChanged(CharSequence, int, int, int)} method for specified
+ * {@link TextView}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectOnFocusChangeListener(R.id.editText)
- * private void onSearchEditTextFocusChange(View v, boolean hasFocus) {
+ * &#064;OnTextChanged(R.id.editText)
+ * private void onSearchTextChanged(CharSequence s, int start, int before, int count) {
  *     // process event
  * }
- * 
  * </pre>
  * 
  * </p>
  * 
  * @see Aibolit
- * @see OnFocusChangeListener
+ * @see TextWatcher
  * 
  * @author Alexey Danilov
  * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnFocusChangeListener {
+public @interface OnTextChanged {
 
     /**
      * Returns identifier of view to be used for setting listener
      * 
-     * @return int view id
+     * @return int view id. View must be instance of {@link TextView} 
      */
     int value();
 

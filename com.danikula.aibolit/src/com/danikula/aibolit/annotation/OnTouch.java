@@ -26,13 +26,13 @@ import android.view.View.OnTouchListener;
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link OnTouchListener#onTouch(View, android.view.MotionEvent)} method for specified view.
+ * Annotation is used for injecting {@link OnTouchListener#onTouch(View, android.view.MotionEvent)} method for specified view.
  * See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * <pre>
- * &#064;InjectOnTouchListener(R.id.button)
+ * &#064;OnTouch(R.id.button)
  * private boolean onButtonTouch(View v, MotionEvent event) {
  *     // handle touch event
  *     return false;
@@ -48,7 +48,7 @@ import com.danikula.aibolit.Aibolit;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnTouchListener {
+public @interface OnTouch {
 
     /**
      * Returns identifier of view to be used for setting listener

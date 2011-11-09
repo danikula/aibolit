@@ -22,7 +22,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnRadioGroupCheckedChangeListener;
+import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
 
 /**
  * Injects {@link RadioGroup.OnCheckedChangeListener#onCheckedChanged(RadioGroup, int)} method
@@ -31,11 +31,11 @@ import com.danikula.aibolit.annotation.InjectOnRadioGroupCheckedChangeListener;
  * 
  */
 /* package private */class OnRadioGroupCheckedChangeInjector extends
-        AbstractMethodInjector<InjectOnRadioGroupCheckedChangeListener> {
+        AbstractMethodInjector<OnRadioGroupCheckedChange> {
 
     @Override
     public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod,
-            InjectOnRadioGroupCheckedChangeListener annotation) {
+            OnRadioGroupCheckedChange annotation) {
         Class<?>[] argsTypes = new Class<?>[] { RadioGroup.class, int.class };
         Method targetMethod = getMethod(OnCheckedChangeListener.class, "onCheckedChanged", argsTypes, sourceMethod);
         OnCheckedChangeListener onCheckedChangeListener = createInvokationProxy(OnCheckedChangeListener.class, methodOwner,

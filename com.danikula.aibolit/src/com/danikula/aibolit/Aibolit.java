@@ -30,22 +30,22 @@ import android.view.InflateException;
 import android.view.View;
 
 import com.danikula.aibolit.annotation.AibolitSettings;
-import com.danikula.aibolit.annotation.InjectArrayAdapter;
-import com.danikula.aibolit.annotation.InjectOnCheckedChangeListener;
-import com.danikula.aibolit.annotation.InjectOnClickListener;
-import com.danikula.aibolit.annotation.InjectOnCreateContextMenuListener;
-import com.danikula.aibolit.annotation.InjectOnEditorActionListener;
-import com.danikula.aibolit.annotation.InjectOnFocusChangeListener;
-import com.danikula.aibolit.annotation.InjectOnItemClickListener;
-import com.danikula.aibolit.annotation.InjectOnItemSelectedListener;
-import com.danikula.aibolit.annotation.InjectOnKeyListener;
-import com.danikula.aibolit.annotation.InjectOnLongClickListener;
-import com.danikula.aibolit.annotation.InjectOnRadioGroupCheckedChangeListener;
-import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
-import com.danikula.aibolit.annotation.InjectOnTouchListener;
-import com.danikula.aibolit.annotation.InjectResource;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
+import com.danikula.aibolit.annotation.OnCheckedChange;
+import com.danikula.aibolit.annotation.OnClick;
+import com.danikula.aibolit.annotation.OnCreateContextMenu;
+import com.danikula.aibolit.annotation.OnEditorAction;
+import com.danikula.aibolit.annotation.OnFocusChange;
+import com.danikula.aibolit.annotation.OnItemClick;
+import com.danikula.aibolit.annotation.OnItemSelected;
+import com.danikula.aibolit.annotation.OnKey;
+import com.danikula.aibolit.annotation.OnLongClick;
+import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
+import com.danikula.aibolit.annotation.OnTextChanged;
+import com.danikula.aibolit.annotation.OnTouch;
+import com.danikula.aibolit.annotation.Resource;
 import com.danikula.aibolit.annotation.InjectService;
-import com.danikula.aibolit.annotation.InjectSystemService;
+import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.injector.AbstractFieldInjector;
 import com.danikula.aibolit.injector.AbstractMethodInjector;
@@ -56,26 +56,26 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * Class can inject:
  * <ul>
  * <li>Views annotated by {@link ViewById}</li>
- * <li>Inflated layout annotated by {@link InjectResource}</li>
+ * <li>Inflated layout annotated by {@link Resource}</li>
  * <li>Application resources (drawable, string, animation, boolean, dimension, integer, array, color) annotated by
- * {@link InjectResource}.</li>
- * <li>ArrayAdapter annotated by {@link InjectArrayAdapter}</li>
- * <li>System services annotated by {@link InjectSystemService}</li>
+ * {@link Resource}.</li>
+ * <li>ArrayAdapter annotated by {@link StringArrayAdapter}</li>
+ * <li>System services annotated by {@link SystemService}</li>
  * <li>Custom application services annotated by {@link InjectService} and resolved with help {@link ServicesResolver}</li>
  * <li>Events handlers annotated by:
  * <ul>
- * <li> {@link InjectOnCheckedChangeListener}</li>
- * <li> {@link InjectOnClickListener}</li>
- * <li> {@link InjectOnCreateContextMenuListener}</li>
- * <li> {@link InjectOnEditorActionListener}</li>
- * <li> {@link InjectOnFocusChangeListener}</li>
- * <li> {@link InjectOnItemClickListener}</li>
- * <li> {@link InjectOnItemSelectedListener}</li>
- * <li> {@link InjectOnKeyListener}</li>
- * <li> {@link InjectOnLongClickListener}</li>
- * <li> {@link InjectOnRadioGroupCheckedChangeListener}</li>
- * <li> {@link InjectOnTextChangedListener}</li>
- * <li> {@link InjectOnTouchListener}</li>
+ * <li> {@link OnCheckedChange}</li>
+ * <li> {@link OnClick}</li>
+ * <li> {@link OnCreateContextMenu}</li>
+ * <li> {@link OnEditorAction}</li>
+ * <li> {@link OnFocusChange}</li>
+ * <li> {@link OnItemClick}</li>
+ * <li> {@link OnItemSelected}</li>
+ * <li> {@link OnKey}</li>
+ * <li> {@link OnLongClick}</li>
+ * <li> {@link OnRadioGroupCheckedChange}</li>
+ * <li> {@link OnTextChanged}</li>
+ * <li> {@link OnTouch}</li>
  * </ul>
  * </li>
  * </ul>
@@ -87,22 +87,22 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * 
  *     // annotate fields to be injected...
  *     
- *     &#064;InjectView(R.id.messageEditText)
+ *     &#064;ViewById(R.id.messageEditText)
  *     private EditText messageEditText;
  * 
- *     &#064;InjectView(R.id.historyListView)
- *     private ListView historyListView;
+ *     &#064;ViewById
+ *     private ListView historyListView; // use field's name as identifier 
  * 
- *     &#064;InjectResource(R.string.symbols_count)
+ *     &#064;Resource(R.string.symbols_count)
  *     private String symbolsCountPattern;
  *     
- *     &#064;InjectSystemService(Context.NOTIFICATION_SERVICE)
+ *     &#064;SystemService(Context.NOTIFICATION_SERVICE)
  *     private NotificationManager notificationManager;
  *     
  *     &#064;InjectService
  *     private HttpManager httpManager;
  *     
- *     &#064;InjectResource(R.layout.content)
+ *     &#064;Resource(R.layout.content)
  *     private View content;
  *     
  *     ...
@@ -122,17 +122,17 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * 
  *     // annotate event handlers... 
  *     
- *     &#064;InjectOnClickListener(R.id.sendButton)
+ *     &#064;OnClick(R.id.sendButton)
  *     private void onSendButtonClick(View v) {
  *         // handle onClick event
  *     }
  * 
- *     &#064;InjectOnClickListener(R.id.clearHistoryButton)
+ *     &#064;OnClick(R.id.clearHistoryButton)
  *     private void onClearHistoryButtonClick(View v) {
  *         // handle onClick event
  *     }
  * 
- *     &#064;InjectOnTextChangedListener(R.id.messageEditText)
+ *     &#064;OnTextChanged(R.id.messageEditText)
  *     public void onMessageTextChanged(CharSequence s, int start, int before, int count) {
  *         // handle text changed event
  *     }
@@ -292,7 +292,7 @@ public class Aibolit {
      * 
      * Note: this method is applicable only for injection fields in object without any visible presentation (Service,
      * BroadcastReceiver, etc...), so you can use it only for injecting fields annotated with {@link InjectService},
-     * {@link InjectSystemService}, {@link InjectResource}, InjectArrayAdapter
+     * {@link SystemService}, {@link Resource}, InjectArrayAdapter
      * 
      * @param patient Object an object to be processed, can't be <code>null</code>
      * @param context Context android context, can't be <code>null</code>

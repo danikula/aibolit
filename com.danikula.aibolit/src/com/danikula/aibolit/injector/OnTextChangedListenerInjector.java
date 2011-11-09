@@ -22,7 +22,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
+import com.danikula.aibolit.annotation.OnTextChanged;
 
 /**
  * Injects {@link TextWatcher#onTextChanged(CharSequence, int, int, int)} method
@@ -30,10 +30,10 @@ import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnTextChangedListenerInjector extends AbstractMethodInjector<InjectOnTextChangedListener> {
+/* package private */class OnTextChangedListenerInjector extends AbstractMethodInjector<OnTextChanged> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnTextChangedListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnTextChanged annotation) {
         Class<?>[] argsTypes = new Class<?>[] { CharSequence.class, int.class, int.class, int.class };
         Method targetMethod = getMethod(TextWatcher.class, "onTextChanged", argsTypes, sourceMethod);
         TextWatcher textWatcher = createInvokationProxy(TextWatcher.class, methodOwner, sourceMethod, targetMethod);

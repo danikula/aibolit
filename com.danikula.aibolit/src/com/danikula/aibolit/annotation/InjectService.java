@@ -24,7 +24,7 @@ import com.danikula.aibolit.Aibolit;
 import com.danikula.aibolit.ServicesResolver;
 
 /**
- * Anotation is used for injecting application service into field. See docs for {@link Aibolit} for more information.
+ * Annotation is used for injecting application service into field. See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:

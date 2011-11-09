@@ -27,7 +27,7 @@ import android.view.animation.AnimationUtils;
 
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectResource;
+import com.danikula.aibolit.annotation.Resource;
 
 /**
  * Injects application resource(drawable, string, anim, layout, bool, dimen, integer, array, color)
@@ -35,10 +35,10 @@ import com.danikula.aibolit.annotation.InjectResource;
  * @author Alexey Danilov
  * 
  */
-/* package private */class ResourceInjector extends AbstractFieldInjector<InjectResource> {
+/* package private */class ResourceInjector extends AbstractFieldInjector<Resource> {
 
     @Override
-    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, InjectResource annotation) {
+    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, Resource annotation) {
         Context context = injectionContext.getAndroidContext();
         Resources resources = context.getResources();
         Class<?> fieldType = field.getType();

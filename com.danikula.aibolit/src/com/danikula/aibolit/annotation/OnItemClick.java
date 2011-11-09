@@ -22,20 +22,20 @@ import java.lang.annotation.Target;
 
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link OnItemSelectedListener#onItemSelected(AdapterView, View, int, long)} method
- * for specified {@link AdapterView}. See docs for {@link Aibolit} for more information.
+ * Annotation is used for injecting {@link OnItemClickListener#onItemClick(AdapterView, View, int, long)} method for
+ * specified {@link AdapterView}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectOnItemSelectedListener(R.id.listView)
- * private void onListViewItemSelected(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+ * &#064;OnItemClick(R.id.listView)
+ * private void onListViewItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
  *     // process event
  * }
  * </pre>
@@ -43,14 +43,14 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see OnItemSelectedListener
+ * @see OnItemClickListener
  * 
  * @author Alexey Danilov
  * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnItemSelectedListener {
+public @interface OnItemClick {
 
     /**
      * Returns identifier of view to be used for setting listener

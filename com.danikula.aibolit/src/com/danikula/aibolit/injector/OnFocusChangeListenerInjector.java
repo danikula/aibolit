@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.View.OnFocusChangeListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnFocusChangeListener;
+import com.danikula.aibolit.annotation.OnFocusChange;
 
 /**
  * Injects {@link OnFocusChangeListener#onFocusChange(View, boolean)} method
@@ -29,10 +29,10 @@ import com.danikula.aibolit.annotation.InjectOnFocusChangeListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnFocusChangeListenerInjector extends AbstractMethodInjector<InjectOnFocusChangeListener> {
+/* package private */class OnFocusChangeListenerInjector extends AbstractMethodInjector<OnFocusChange> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnFocusChangeListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnFocusChange annotation) {
         Class<?>[] argsTypes = new Class<?>[] { View.class, boolean.class };
         Method targetMethod = getMethod(OnFocusChangeListener.class, "onFocusChange", argsTypes, sourceMethod);
         OnFocusChangeListener onFocusChangeListener = createInvokationProxy(OnFocusChangeListener.class, methodOwner,

@@ -22,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnItemClickListener;
+import com.danikula.aibolit.annotation.OnItemClick;
 
 /**
  * Injects {@link AdapterView.OnItemClickListener#onItemClick(AdapterView, View, int, long) } method
@@ -30,10 +30,10 @@ import com.danikula.aibolit.annotation.InjectOnItemClickListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnItemClickListenerInjector extends AbstractMethodInjector<InjectOnItemClickListener> {
+/* package private */class OnItemClickListenerInjector extends AbstractMethodInjector<OnItemClick> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnItemClickListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnItemClick annotation) {
         Class<?>[] argsTypes = new Class<?>[] { AdapterView.class, View.class, int.class, long.class };
         Method targetMethod = getMethod(OnItemClickListener.class, "onItemClick", argsTypes, sourceMethod);
         OnItemClickListener onItemClickListener = createInvokationProxy(OnItemClickListener.class, methodOwner, sourceMethod,

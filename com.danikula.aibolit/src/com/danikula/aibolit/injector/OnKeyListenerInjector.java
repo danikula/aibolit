@@ -22,7 +22,7 @@ import android.view.View;
 import android.view.View.OnKeyListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnKeyListener;
+import com.danikula.aibolit.annotation.OnKey;
 
 /**
  * Injects {@link View.OnKeyListener#onKey(View, int, KeyEvent)} method
@@ -30,10 +30,10 @@ import com.danikula.aibolit.annotation.InjectOnKeyListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnKeyListenerInjector extends AbstractMethodInjector<InjectOnKeyListener> {
+/* package private */class OnKeyListenerInjector extends AbstractMethodInjector<OnKey> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnKeyListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnKey annotation) {
         Class<?>[] argsTypes = new Class<?>[] { View.class, int.class, KeyEvent.class };
         Method targetMethod = getMethod(OnKeyListener.class, "onKey", argsTypes, sourceMethod);
         OnKeyListener onKeyListener = createInvokationProxy(OnKeyListener.class, methodOwner, sourceMethod, targetMethod);

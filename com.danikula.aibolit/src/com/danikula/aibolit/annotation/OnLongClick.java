@@ -21,21 +21,21 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.view.View;
-import android.view.View.OnKeyListener;
+import android.view.View.OnLongClickListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link OnKeyListener#onKey(View, int, android.view.KeyEvent)} method for specified view.
+ * Anotation is used for injecting {@link OnLongClickListener#onLongClick(android.view.View)} method for specified {@link View}.
  * See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectOnKeyListener(R.id.editText)
- * private boolean onKey(View v, int keyCode, KeyEvent event) {
- *     // process key event
+ * &#064;OnLongClick(R.id.button)
+ * private boolean onButtonLongClickListener(View view) {
+ *     // process event
  *     return false;
  * }
  * </pre>
@@ -43,14 +43,14 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see OnKeyListener
+ * @see OnLongClickListener
  * 
  * @author Alexey Danilov
  * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnKeyListener {
+public @interface OnLongClick {
 
     /**
      * Returns identifier of view to be used for setting listener

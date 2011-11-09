@@ -21,37 +21,37 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import android.view.View;
-import android.view.View.OnCreateContextMenuListener;
+import android.view.View.OnKeyListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting
- * {@link OnCreateContextMenuListener#onCreateContextMenu(android.view.ContextMenu, View, android.view.ContextMenu.ContextMenuInfo)}
- * method for specified {@link View}. See docs for {@link Aibolit} for more information.
+ * Annotation is used for injecting {@link OnKeyListener#onKey(View, int, android.view.KeyEvent)} method for specified view.
+ * See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectOnCreateContextMenuListener(R.id.editText)
- * void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
- *  process event
+ * &#064;OnKey(R.id.editText)
+ * private boolean onKey(View v, int keyCode, KeyEvent event) {
+ *     // process key event
+ *     return false;
  * }
- * 
  * </pre>
  * 
  * </p>
  * 
  * @see Aibolit
- * @see OnCreateContextMenuListener
+ * @see OnKeyListener
  * 
  * @author Alexey Danilov
  * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnCreateContextMenuListener {
+public @interface OnKey {
+
     /**
      * Returns identifier of view to be used for setting listener
      * 

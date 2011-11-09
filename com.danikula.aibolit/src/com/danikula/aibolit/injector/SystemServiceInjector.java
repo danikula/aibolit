@@ -24,7 +24,7 @@ import android.content.Context;
 
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectSystemService;
+import com.danikula.aibolit.annotation.SystemService;
 
 /**
  * Injects system service.
@@ -32,7 +32,7 @@ import com.danikula.aibolit.annotation.InjectSystemService;
  * @author Alexey Danilov
  * 
  */
-/* package private */class SystemServiceInjector extends AbstractFieldInjector<InjectSystemService> {
+/* package private */class SystemServiceInjector extends AbstractFieldInjector<SystemService> {
 
     // @formatter:off
     private static final Set<String> SUPPORTED_SERVICES = new HashSet<String>(Arrays.asList(
@@ -53,7 +53,7 @@ import com.danikula.aibolit.annotation.InjectSystemService;
     // @formatter:on
 
     @Override
-    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, InjectSystemService annotation) {
+    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, SystemService annotation) {
         Context context = injectionContext.getAndroidContext();
         String serviceName = annotation.value();
         if (SUPPORTED_SERVICES.contains(serviceName)) {

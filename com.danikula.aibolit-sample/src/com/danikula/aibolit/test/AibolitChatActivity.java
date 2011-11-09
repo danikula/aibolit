@@ -14,9 +14,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.danikula.aibolit.Aibolit;
-import com.danikula.aibolit.annotation.InjectOnClickListener;
-import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
-import com.danikula.aibolit.annotation.InjectResource;
+import com.danikula.aibolit.annotation.OnClick;
+import com.danikula.aibolit.annotation.OnTextChanged;
+import com.danikula.aibolit.annotation.Resource;
 import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.test.support.Message;
 import com.danikula.aibolit.test.support.MutableListAdapter;
@@ -32,7 +32,7 @@ public class AibolitChatActivity extends Activity {
     @ViewById(R.id.historyListView)
     private ListView historyListView;
 
-    @InjectResource(R.string.symbols_count)
+    @Resource(R.string.symbols_count)
     private String symbolsCountPattern;
 
     private LogAdapter adapter;
@@ -74,19 +74,19 @@ public class AibolitChatActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @InjectOnClickListener(R.id.sendButton)
+    @OnClick(R.id.sendButton)
     private void onSendButtonClick(View v) {
         String text = messageEditText.getText().toString();
         adapter.add(new Message(new Date(), text));
         messageEditText.getEditableText().clear();
     }
 
-    @InjectOnClickListener(R.id.clearHistoryButton)
+    @OnClick(R.id.clearHistoryButton)
     private void onClearHistoryButtonClick(View v) {
         adapter.clear();
     }
 
-    @InjectOnTextChangedListener(R.id.messageEditText)
+    @OnTextChanged(R.id.messageEditText)
     public void onMessageTextChanged(CharSequence s, int start, int before, int count) {
         String symbolsCountText = String.format(symbolsCountPattern, s.length());
         symbolsCountTextVew.setText(symbolsCountText);

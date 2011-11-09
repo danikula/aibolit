@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnEditorActionListener;
+import com.danikula.aibolit.annotation.OnEditorAction;
 
 /**
  * Injects {@link TextView.OnEditorActionListener#onEditorAction(TextView, int, KeyEvent)} method
@@ -31,10 +31,10 @@ import com.danikula.aibolit.annotation.InjectOnEditorActionListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnEditorActionListenerInjector extends AbstractMethodInjector<InjectOnEditorActionListener> {
+/* package private */class OnEditorActionListenerInjector extends AbstractMethodInjector<OnEditorAction> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnEditorActionListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnEditorAction annotation) {
         Class<?>[] argsTypes = new Class<?>[] { TextView.class, int.class, KeyEvent.class };
         Method targetMethod = getMethod(OnEditorActionListener.class, "onEditorAction", argsTypes, sourceMethod);
         OnEditorActionListener onEditorActionListener = createInvokationProxy(OnEditorActionListener.class, methodOwner,

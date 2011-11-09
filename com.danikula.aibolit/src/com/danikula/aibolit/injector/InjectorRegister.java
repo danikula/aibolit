@@ -24,22 +24,22 @@ import java.util.Map;
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.ServicesResolver;
 import com.danikula.aibolit.Validate;
-import com.danikula.aibolit.annotation.InjectArrayAdapter;
-import com.danikula.aibolit.annotation.InjectOnCheckedChangeListener;
-import com.danikula.aibolit.annotation.InjectOnClickListener;
-import com.danikula.aibolit.annotation.InjectOnCreateContextMenuListener;
-import com.danikula.aibolit.annotation.InjectOnEditorActionListener;
-import com.danikula.aibolit.annotation.InjectOnFocusChangeListener;
-import com.danikula.aibolit.annotation.InjectOnItemClickListener;
-import com.danikula.aibolit.annotation.InjectOnItemSelectedListener;
-import com.danikula.aibolit.annotation.InjectOnKeyListener;
-import com.danikula.aibolit.annotation.InjectOnLongClickListener;
-import com.danikula.aibolit.annotation.InjectOnRadioGroupCheckedChangeListener;
-import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
-import com.danikula.aibolit.annotation.InjectOnTouchListener;
-import com.danikula.aibolit.annotation.InjectResource;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
+import com.danikula.aibolit.annotation.OnCheckedChange;
+import com.danikula.aibolit.annotation.OnClick;
+import com.danikula.aibolit.annotation.OnCreateContextMenu;
+import com.danikula.aibolit.annotation.OnEditorAction;
+import com.danikula.aibolit.annotation.OnFocusChange;
+import com.danikula.aibolit.annotation.OnItemClick;
+import com.danikula.aibolit.annotation.OnItemSelected;
+import com.danikula.aibolit.annotation.OnKey;
+import com.danikula.aibolit.annotation.OnLongClick;
+import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
+import com.danikula.aibolit.annotation.OnTextChanged;
+import com.danikula.aibolit.annotation.OnTouch;
+import com.danikula.aibolit.annotation.Resource;
 import com.danikula.aibolit.annotation.InjectService;
-import com.danikula.aibolit.annotation.InjectSystemService;
+import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 
 public class InjectorRegister {
@@ -52,23 +52,23 @@ public class InjectorRegister {
         INJECTORS_REGISTER = new HashMap<Class<? extends Annotation>, AbstractInjector<?>>();
 
         INJECTORS_REGISTER.put(ViewById.class, new ViewByIdInjector());
-        INJECTORS_REGISTER.put(InjectResource.class, new ResourceInjector());
-        INJECTORS_REGISTER.put(InjectArrayAdapter.class, new ArrayAdapterInjector());
-        INJECTORS_REGISTER.put(InjectSystemService.class, new SystemServiceInjector());
+        INJECTORS_REGISTER.put(Resource.class, new ResourceInjector());
+        INJECTORS_REGISTER.put(StringArrayAdapter.class, new ArrayAdapterInjector());
+        INJECTORS_REGISTER.put(SystemService.class, new SystemServiceInjector());
         INJECTORS_REGISTER.put(InjectService.class, new ServiceInjector(SERVICES_RESOLVERS));
 
-        INJECTORS_REGISTER.put(InjectOnClickListener.class, new OnClickListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnLongClickListener.class, new OnLongClickListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnItemClickListener.class, new OnItemClickListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnItemSelectedListener.class, new OnItemSelectedListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnTouchListener.class, new OnTouchListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnKeyListener.class, new OnKeyListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnFocusChangeListener.class, new OnFocusChangeListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnCreateContextMenuListener.class, new OnCreateContextMenuListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnTextChangedListener.class, new OnTextChangedListenerInjector());
-        INJECTORS_REGISTER.put(InjectOnCheckedChangeListener.class, new OnCheckedChangeInjector());
-        INJECTORS_REGISTER.put(InjectOnRadioGroupCheckedChangeListener.class, new OnRadioGroupCheckedChangeInjector());
-        INJECTORS_REGISTER.put(InjectOnEditorActionListener.class, new OnEditorActionListenerInjector());
+        INJECTORS_REGISTER.put(OnClick.class, new OnClickListenerInjector());
+        INJECTORS_REGISTER.put(OnLongClick.class, new OnLongClickListenerInjector());
+        INJECTORS_REGISTER.put(OnItemClick.class, new OnItemClickListenerInjector());
+        INJECTORS_REGISTER.put(OnItemSelected.class, new OnItemSelectedListenerInjector());
+        INJECTORS_REGISTER.put(OnTouch.class, new OnTouchListenerInjector());
+        INJECTORS_REGISTER.put(OnKey.class, new OnKeyListenerInjector());
+        INJECTORS_REGISTER.put(OnFocusChange.class, new OnFocusChangeListenerInjector());
+        INJECTORS_REGISTER.put(OnCreateContextMenu.class, new OnCreateContextMenuListenerInjector());
+        INJECTORS_REGISTER.put(OnTextChanged.class, new OnTextChangedListenerInjector());
+        INJECTORS_REGISTER.put(OnCheckedChange.class, new OnCheckedChangeInjector());
+        INJECTORS_REGISTER.put(OnRadioGroupCheckedChange.class, new OnRadioGroupCheckedChangeInjector());
+        INJECTORS_REGISTER.put(OnEditorAction.class, new OnEditorActionListenerInjector());
     }
 
     public static boolean contains(Class<? extends Annotation> annotationClass) {

@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnLongClickListener;
+import com.danikula.aibolit.annotation.OnLongClick;
 
 /**
  * Injects {@link View.OnLongClickListener#onLongClick(View)} method
@@ -29,10 +29,10 @@ import com.danikula.aibolit.annotation.InjectOnLongClickListener;
  * @author Alexey Danilov
  * 
  */
-/* package private */class OnLongClickListenerInjector extends AbstractMethodInjector<InjectOnLongClickListener> {
+/* package private */class OnLongClickListenerInjector extends AbstractMethodInjector<OnLongClick> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnLongClickListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnLongClick annotation) {
         Method targetMethod = getMethod(OnLongClickListener.class, "onLongClick", new Class<?>[] { View.class }, sourceMethod);
         checkMethodSignature(targetMethod, sourceMethod);
         OnLongClickListener listener = createInvokationProxy(OnLongClickListener.class, methodOwner, sourceMethod, targetMethod);

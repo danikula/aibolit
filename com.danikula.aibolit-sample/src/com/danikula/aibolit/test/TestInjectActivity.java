@@ -26,20 +26,20 @@ import android.widget.TextView;
 
 import com.danikula.aibolit.Aibolit;
 import com.danikula.aibolit.annotation.AibolitSettings;
-import com.danikula.aibolit.annotation.InjectArrayAdapter;
-import com.danikula.aibolit.annotation.InjectOnCheckedChangeListener;
-import com.danikula.aibolit.annotation.InjectOnClickListener;
-import com.danikula.aibolit.annotation.InjectOnFocusChangeListener;
-import com.danikula.aibolit.annotation.InjectOnItemClickListener;
-import com.danikula.aibolit.annotation.InjectOnItemSelectedListener;
-import com.danikula.aibolit.annotation.InjectOnKeyListener;
-import com.danikula.aibolit.annotation.InjectOnLongClickListener;
-import com.danikula.aibolit.annotation.InjectOnRadioGroupCheckedChangeListener;
-import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
-import com.danikula.aibolit.annotation.InjectOnTouchListener;
-import com.danikula.aibolit.annotation.InjectResource;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
+import com.danikula.aibolit.annotation.OnCheckedChange;
+import com.danikula.aibolit.annotation.OnClick;
+import com.danikula.aibolit.annotation.OnFocusChange;
+import com.danikula.aibolit.annotation.OnItemClick;
+import com.danikula.aibolit.annotation.OnItemSelected;
+import com.danikula.aibolit.annotation.OnKey;
+import com.danikula.aibolit.annotation.OnLongClick;
+import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
+import com.danikula.aibolit.annotation.OnTextChanged;
+import com.danikula.aibolit.annotation.OnTouch;
+import com.danikula.aibolit.annotation.Resource;
 import com.danikula.aibolit.annotation.InjectService;
-import com.danikula.aibolit.annotation.InjectSystemService;
+import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.test.AibolitTestApplication.HttpManager;
 
@@ -55,46 +55,46 @@ public class TestInjectActivity extends Activity {
     @ViewById(R.id.listView)
     public ListView listView;
 
-    @InjectSystemService(Context.LAYOUT_INFLATER_SERVICE)
+    @SystemService(Context.LAYOUT_INFLATER_SERVICE)
     private LayoutInflater layoutInflater;
     
-    @InjectSystemService(Context.NOTIFICATION_SERVICE)
+    @SystemService(Context.NOTIFICATION_SERVICE)
     private NotificationManager notificationManager;
     
-    @InjectResource(R.anim.my_anim)
+    @Resource(R.anim.my_anim)
     private Animation animation;
     
-    @InjectResource(R.color.button_text)
+    @Resource(R.color.button_text)
     private ColorStateList buttonText;
 
-    @InjectResource(R.color.translucent_red)
+    @Resource(R.color.translucent_red)
     private int redColor;
 
-    @InjectResource(android.R.drawable.btn_default)
+    @Resource(android.R.drawable.btn_default)
     private Drawable drawable;
 
-    @InjectResource(android.R.layout.simple_expandable_list_item_2)
+    @Resource(android.R.layout.simple_expandable_list_item_2)
     private View view;
 
-    @InjectResource(R.array.numbers)
+    @Resource(R.array.numbers)
     private String[] numbers;
     
-    @InjectResource(R.array.icons)
+    @Resource(R.array.icons)
     private TypedArray icons;
     
-    @InjectResource(R.array.integers)
+    @Resource(R.array.integers)
     private int[] integers;
     
-    @InjectResource(R.bool.screen_small)
+    @Resource(R.bool.screen_small)
     private boolean screenSmall;
 
-    @InjectResource(R.dimen.font_size)
+    @Resource(R.dimen.font_size)
     private float fontSize;
 
-    @InjectResource(R.integer.max_speed)
+    @Resource(R.integer.max_speed)
     private int maxSpeed;
 
-    @InjectArrayAdapter(textArrayResourceId = R.array.numbers, layoutId = android.R.layout.simple_list_item_1)
+    @StringArrayAdapter(textArrayResourceId = R.array.numbers, layoutId = android.R.layout.simple_list_item_1)
     private ArrayAdapter<CharSequence> adapter;
     
     @Override
@@ -143,61 +143,61 @@ public class TestInjectActivity extends Activity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    @InjectOnClickListener(R.id.button)
+    @OnClick(R.id.button)
     private void onButtonClickListener(View view) {
         Log.d("debug", "onButtonClickListener!");
         httpManager.invokeRequest(new Object());
     }
 
-    @InjectOnLongClickListener(R.id.button)
+    @OnLongClick(R.id.button)
     private boolean onButtonLongClickListener(View view) {
         Log.d("debug", "onButtonLongClickListener! " + view);
         new ConcreteSimpleDialog(this).show();
         return false;
     }
     
-    @InjectOnTouchListener(R.id.button)
+    @OnTouch(R.id.button)
     private boolean onButtonTouch(View v, MotionEvent event) {
         // handle touch event
         return false;
     }
 
-    @InjectOnItemClickListener(R.id.listView)
+    @OnItemClick(R.id.listView)
     private void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("debug", String.format("onItemClick: %s, %s, %s, %s", parent, view, position, id));
     }
     
-    @InjectOnItemSelectedListener(R.id.listView)
+    @OnItemSelected(R.id.listView)
     private void onListViewItemSelected(AdapterView<?> parent, View view, int position, long id) {
     }
 
-    @InjectOnTouchListener(R.id.textView)
+    @OnTouch(R.id.textView)
     private boolean onTextViewTouch(View v, MotionEvent event) {
         Log.d("debug", String.format("onTextViewTouch: %s, %s", v, event));
         return false;
     }
 
-    @InjectOnFocusChangeListener(R.id.editText)
+    @OnFocusChange(R.id.editText)
     private void onFocusChange(View v, boolean hasFocus) {
         Log.d("debug", String.format("onFocusChange: %s, %s", v, hasFocus));
     }
 
-    @InjectOnTextChangedListener(R.id.editText)
+    @OnTextChanged(R.id.editText)
     private void onSearchTextChanged(CharSequence s, int start, int before, int count) {
         Log.d("debug", String.format("onTextChanged: %s, %s, %s, %s", s, start, before, count));
     }
 
-    @InjectOnCheckedChangeListener(R.id.checkbox)
+    @OnCheckedChange(R.id.checkbox)
     private void onCheckedChanged(android.widget.CompoundButton arg0, boolean arg1) {
         Log.d("debug", String.format("onCheckedChanged: %s, %s", arg0, arg1));
     }
     
-    @InjectOnRadioGroupCheckedChangeListener(R.id.radiogroup)
+    @OnRadioGroupCheckedChange(R.id.radiogroup)
     private void onRadioGroupCheckedChanged(RadioGroup rg, int arg1) {
         Log.d("debug", String.format("onCheckedChanged: %s, %s", rg, arg1));
     }
 
-    @InjectOnKeyListener(R.id.editText)
+    @OnKey(R.id.editText)
     private boolean onKey(View v, int keyCode, KeyEvent event) {
         Log.d("debug", String.format("onKey: %s, %s, %s", v, keyCode, event));
         return false;

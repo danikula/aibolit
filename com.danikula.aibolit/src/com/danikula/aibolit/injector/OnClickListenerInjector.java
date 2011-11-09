@@ -21,7 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectOnClickListener;
+import com.danikula.aibolit.annotation.OnClick;
 
 /**
  * Injects {@link View.OnClickListener#onClick(View)} method
@@ -29,10 +29,10 @@ import com.danikula.aibolit.annotation.InjectOnClickListener;
  * @author Alexey Danilov
  * 
  */
-/*package private*/class OnClickListenerInjector extends AbstractMethodInjector<InjectOnClickListener> {
+/*package private*/class OnClickListenerInjector extends AbstractMethodInjector<OnClick> {
 
     @Override
-    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, InjectOnClickListener annotation) {
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, OnClick annotation) {
         Method targetMethod = getMethod(OnClickListener.class, "onClick", new Class<?>[] { View.class }, sourceMethod);
         OnClickListener onClickListener = createInvokationProxy(OnClickListener.class, methodOwner, sourceMethod, targetMethod);
 

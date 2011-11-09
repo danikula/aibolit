@@ -20,42 +20,41 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link OnClickListener#onClick(View)} method for specified {@link View}. See docs for
- * {@link Aibolit} for more information.
+ * Annotation is used for injecting {@link OnCheckedChangeListener#onCheckedChanged(RadioGroup, int)} method for specified
+ * {@link RadioGroup}. See docs for {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectOnClickListener(R.id.button)
- * private void onButtonClickListener(View view) {
+ * &#064;OnRadioGroupCheckedChange(R.id.radiogroup)
+ * private void onRadioGroupCheckedChanged(RadioGroup rg, int arg1) {
  *     // process event
  * }
- * 
  * </pre>
  * 
  * </p>
  * 
  * @see Aibolit
- * @see OnClickListener
+ * @see OnCheckedChangeListener
  * 
  * @author Alexey Danilov
  * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnClickListener {
+public @interface OnRadioGroupCheckedChange {
 
     /**
      * Returns identifier of view to be used for setting listener
      * 
-     * @return int view id
+     * @return int view id. View must be instance of {@link RadioGroup}
      */
     int value();
 

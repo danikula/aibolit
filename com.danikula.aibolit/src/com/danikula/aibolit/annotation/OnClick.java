@@ -20,21 +20,21 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting {@link OnCheckedChangeListener#onCheckedChanged(CompoundButton, boolean)} method
- * for specified {@link CompoundButton}. See docs for {@link Aibolit} for more information.
+ * Annotation is used for injecting {@link OnClickListener#onClick(View)} method for specified {@link View}. See docs for
+ * {@link Aibolit} for more information.
  * 
  * <p>
  * Usage:
  * 
  * <pre>
- * &#064;InjectOnCheckedChangeListener(R.id.checkbox)
- * private void onCheckedChanged(android.widget.CompoundButton arg0, boolean arg1) {
+ * &#064;OnClick(R.id.button)
+ * private void onButtonClickListener(View view) {
  *     // process event
  * }
  * 
@@ -43,19 +43,19 @@ import com.danikula.aibolit.Aibolit;
  * </p>
  * 
  * @see Aibolit
- * @see OnCheckedChangeListener
+ * @see OnClick
  * 
  * @author Alexey Danilov
  * 
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectOnCheckedChangeListener {
+public @interface OnClick {
 
     /**
      * Returns identifier of view to be used for setting listener
      * 
-     * @return int view id. View must be instance of {@link CompoundButton}
+     * @return int view id
      */
     int value();
 
