@@ -21,7 +21,7 @@ import android.view.View;
 
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.InjectionContext;
-import com.danikula.aibolit.annotation.InjectView;
+import com.danikula.aibolit.annotation.ViewById;
 
 /**
  * Injects view.
@@ -29,10 +29,10 @@ import com.danikula.aibolit.annotation.InjectView;
  * @author Alexey Danilov
  * 
  */
-/* package private */class ViewInjector extends AbstractFieldInjector<InjectView> {
+/* package private */class ViewInjector extends AbstractFieldInjector<ViewById> {
 
     @Override
-    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, InjectView annotation) {
+    public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, ViewById annotation) {
         int viewId = annotation.value();
         View view = getViewById(injectionContext.getRootView(), viewId);
         if (view == null) {

@@ -46,7 +46,7 @@ import com.danikula.aibolit.annotation.InjectOnTouchListener;
 import com.danikula.aibolit.annotation.InjectResource;
 import com.danikula.aibolit.annotation.InjectService;
 import com.danikula.aibolit.annotation.InjectSystemService;
-import com.danikula.aibolit.annotation.InjectView;
+import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.injector.AbstractFieldInjector;
 import com.danikula.aibolit.injector.AbstractMethodInjector;
 import com.danikula.aibolit.injector.InjectorRegister;
@@ -55,7 +55,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * Does injections into object. <br/>
  * Class can inject:
  * <ul>
- * <li>Views annotated by {@link InjectView}</li>
+ * <li>Views annotated by {@link ViewById}</li>
  * <li>Inflated layout annotated by {@link InjectResource}</li>
  * <li>Application resources (drawable, string, animation, boolean, dimension, integer, array, color) annotated by
  * {@link InjectResource}.</li>

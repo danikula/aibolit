@@ -48,7 +48,7 @@ import com.danikula.aibolit.Aibolit;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface InjectView {
+public @interface ViewById {
 
     /**
      * Returns identifier of view

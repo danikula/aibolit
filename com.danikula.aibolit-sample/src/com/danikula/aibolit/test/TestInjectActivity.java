@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -114,6 +118,29 @@ public class TestInjectActivity extends Activity {
         Log.d("debug", "screenSmall: " + screenSmall);
         Log.d("debug", "fontSize: " + fontSize);
         Log.d("debug", "maxSpeed: " + maxSpeed);
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(getString(R.string.menu_aibolit)).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.d("debug", System.currentTimeMillis() + "");
+                startActivity(new Intent(TestInjectActivity.this, AibolitChatActivity.class));
+                return false;
+            }
+        });
+        menu.add(getString(R.string.menu_test)).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Log.d("debug", System.currentTimeMillis() + "");
+                startActivity(new Intent(TestInjectActivity.this, ClassicChatActivity.class));
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 
     @InjectOnClickListener(R.id.button)

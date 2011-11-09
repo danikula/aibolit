@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -33,8 +34,21 @@ public class ClassicChatActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.chat_activity);
         
+        setContentView(R.layout.chat_activity);
+
+        Log.d("debug", System.currentTimeMillis() + "");
+        
+        initComponents();
+        initComponents();
+        initComponents();
+        initComponents();
+        initComponents();
+        
+        Log.d("debug", System.currentTimeMillis() + "");
+    }
+
+    private void initComponents() {
         symbolsCountPattern = getString(R.string.symbols_count);
 
         ListView historyListView = (ListView) findViewById(R.id.historyListView);

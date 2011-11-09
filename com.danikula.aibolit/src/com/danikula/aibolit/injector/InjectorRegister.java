@@ -40,7 +40,7 @@ import com.danikula.aibolit.annotation.InjectOnTouchListener;
 import com.danikula.aibolit.annotation.InjectResource;
 import com.danikula.aibolit.annotation.InjectService;
 import com.danikula.aibolit.annotation.InjectSystemService;
-import com.danikula.aibolit.annotation.InjectView;
+import com.danikula.aibolit.annotation.ViewById;
 
 public class InjectorRegister {
     private static final Map<Class<? extends Annotation>, AbstractInjector<?>> INJECTORS_REGISTER;
@@ -51,7 +51,7 @@ public class InjectorRegister {
         SERVICES_RESOLVERS = new LinkedList<ServicesResolver>();
         INJECTORS_REGISTER = new HashMap<Class<? extends Annotation>, AbstractInjector<?>>();
 
-        INJECTORS_REGISTER.put(InjectView.class, new ViewInjector());
+        INJECTORS_REGISTER.put(ViewById.class, new ViewInjector());
         INJECTORS_REGISTER.put(InjectResource.class, new ResourceInjector());
         INJECTORS_REGISTER.put(InjectArrayAdapter.class, new ArrayAdapterInjector());
         INJECTORS_REGISTER.put(InjectSystemService.class, new SystemServiceInjector());
