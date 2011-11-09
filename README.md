@@ -31,22 +31,22 @@ Example
     
         // annotate fields to be injected...
     
-        @InjectView(R.id.messageEditText)
-        private EditText messageEditText;
+        @ViewById
+        private EditText messageEditText; // use field's name as identifier 
     
-        @InjectView(R.id.historyListView)
+        @ViewById(R.id.historyListView)
         private ListView historyListView;
     
-        @InjectResource(R.string.symbols_count)
+        @Resource(R.string.symbols_count)
         private String symbolsCountPattern;
     
-        @InjectSystemService(Context.NOTIFICATION_SERVICE)
+        @SystemService(Context.NOTIFICATION_SERVICE)
         private NotificationManager notificationManager;
     
         @InjectService
         private HttpManager httpManager;
     
-        @InjectResource(R.layout.content)
+        @Resource(R.layout.content)
         private View content;
     
         ...
@@ -66,17 +66,17 @@ Example
     
         // annotate event handlers... 
     
-        @InjectOnClickListener(R.id.sendButton)
+        @OnClick(R.id.sendButton)
         private void onSendButtonClick(View v) {
             // handle onClick event
         }
     
-        @InjectOnClickListener(R.id.clearHistoryButton)
+        @OnClick(R.id.clearHistoryButton)
         private void onClearHistoryButtonClick(View v) {
             // handle onClick event
         }
     
-        @InjectOnTextChangedListener(R.id.messageEditText)
+        @OnTextChanged(R.id.messageEditText)
         public void onMessageTextChanged(CharSequence s, int start, int before, int count) {
             // handle text changed event
         }
