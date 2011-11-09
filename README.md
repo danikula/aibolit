@@ -94,6 +94,7 @@ For more details [read documentation][1] or browse code
 Developed By
 ============
 Alexey Danilov - danikula@gmail.com
+
 Thanks [Aliaksei Latsinnik][3] for logo :)
 
 If you decide to use Aibolit in your project, please, notify me about it :) I'd love to see how widely it is being used.
