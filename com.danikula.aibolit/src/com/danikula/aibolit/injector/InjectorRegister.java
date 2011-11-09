@@ -51,7 +51,7 @@ public class InjectorRegister {
         SERVICES_RESOLVERS = new LinkedList<ServicesResolver>();
         INJECTORS_REGISTER = new HashMap<Class<? extends Annotation>, AbstractInjector<?>>();
 
-        INJECTORS_REGISTER.put(ViewById.class, new ViewInjector());
+        INJECTORS_REGISTER.put(ViewById.class, new ViewByIdInjector());
         INJECTORS_REGISTER.put(InjectResource.class, new ResourceInjector());
         INJECTORS_REGISTER.put(InjectArrayAdapter.class, new ArrayAdapterInjector());
         INJECTORS_REGISTER.put(InjectSystemService.class, new SystemServiceInjector());

@@ -17,6 +17,8 @@ package com.danikula.aibolit.injector;
 
 import java.lang.reflect.Field;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
 
 import com.danikula.aibolit.InjectingException;
@@ -29,18 +31,29 @@ import com.danikula.aibolit.annotation.ViewById;
  * @author Alexey Danilov
  * 
  */
-/* package private */class ViewInjector extends AbstractFieldInjector<ViewById> {
+/* package private */class ViewByIdInjector extends AbstractFieldInjector<ViewById> {
 
     @Override
     public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, ViewById annotation) {
-        int viewId = annotation.value();
+        String fieldName = field.getName();
+        int viewId = annotation.value() != 0 ? annotation.value() : resolveIdByFieldName(injectionContext, fieldName);
         View view = getViewById(injectionContext.getRootView(), viewId);
         if (view == null) {
-            String errorPattern = "View with id 0x%s for field named '%s' with type %s not found";
-            throw new InjectingException(String.format(errorPattern, Integer.toHexString(viewId), field.getName(),
+            String errorPattern = "View with id 0x%s for field named '%s' with type %s is not found";
+            throw new InjectingException(String.format(errorPattern, Integer.toHexString(viewId), fieldName,
                     field.getType()));
         }
         checkIsFieldAssignable(field, field.getType(), view.getClass());
         setValue(fieldOwner, field, view);
+    }
+
+    private int resolveIdByFieldName(InjectionContext injectionContext, String fieldName) {
+        Context context = injectionContext.getAndroidContext();
+        Resources resources = context.getResources();
+        int viewId = resources.getIdentifier(fieldName, "id", context.getPackageName());
+        if (viewId == 0) {
+            throw new InjectingException(String.format("View with id R.id.%s is not found", fieldName));
+        }
+        return viewId;
     }
 }

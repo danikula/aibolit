@@ -29,13 +29,13 @@ import com.danikula.aibolit.Aibolit;
  * Usage:
  * 
  * <pre>
- * &#064;InjectView(R.id.messageEditText)
+ * &#064;ViewById(R.id.messageEditText)
  * private EditText messageEditText;
  * 
- * &#064;InjectView(R.id.symbolsCountTextVew)
- * private TextView symbolsCountTextVew;
+ * &#064;ViewById
+ * private TextView symbolsCountTextVew; // use field's name as identifier
  * 
- * &#064;InjectView(R.id.historyListView)
+ * &#064;ViewById(R.id.historyListView)
  * private ListView historyListView;
  * </pre>
  * 
@@ -51,10 +51,10 @@ import com.danikula.aibolit.Aibolit;
 public @interface ViewById {
 
     /**
-     * Returns identifier of view
+     * Returns identifier of view, not required. If value is not specified annotated field's name will be used as indentifier's name 
      * 
      * @return int view id
      */
-    int value();
+    int value() default 0;
 
 }

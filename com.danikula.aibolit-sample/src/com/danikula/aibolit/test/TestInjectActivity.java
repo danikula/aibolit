@@ -40,7 +40,7 @@ import com.danikula.aibolit.annotation.InjectOnTouchListener;
 import com.danikula.aibolit.annotation.InjectResource;
 import com.danikula.aibolit.annotation.InjectService;
 import com.danikula.aibolit.annotation.InjectSystemService;
-import com.danikula.aibolit.annotation.InjectView;
+import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.test.AibolitTestApplication.HttpManager;
 
 public class TestInjectActivity extends Activity {
@@ -49,10 +49,10 @@ public class TestInjectActivity extends Activity {
     @InjectService
     private HttpManager httpManager;
 
-    @InjectView(R.id.textView)
+    @ViewById(R.id.textView)
     public TextView textView;
 
-    @InjectView(R.id.listView)
+    @ViewById(R.id.listView)
     public ListView listView;
 
     @InjectSystemService(Context.LAYOUT_INFLATER_SERVICE)
@@ -205,7 +205,7 @@ public class TestInjectActivity extends Activity {
     
     private abstract static class AbstractSimpleDialog extends Dialog {
         
-        @InjectView(android.R.id.text1)
+        @ViewById(android.R.id.text1)
         private TextView textView;
 
         public AbstractSimpleDialog(Context context) {
@@ -224,7 +224,7 @@ public class TestInjectActivity extends Activity {
     @AibolitSettings(injectSuperclasses = true)
     private static class ConcreteSimpleDialog extends AbstractSimpleDialog {
         
-        @InjectView(android.R.id.text2)
+        @ViewById(android.R.id.text2)
         private TextView textView2;
 
         public ConcreteSimpleDialog(Context context) {

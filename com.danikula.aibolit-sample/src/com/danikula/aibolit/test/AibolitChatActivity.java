@@ -17,19 +17,19 @@ import com.danikula.aibolit.Aibolit;
 import com.danikula.aibolit.annotation.InjectOnClickListener;
 import com.danikula.aibolit.annotation.InjectOnTextChangedListener;
 import com.danikula.aibolit.annotation.InjectResource;
-import com.danikula.aibolit.annotation.InjectView;
+import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.test.support.Message;
 import com.danikula.aibolit.test.support.MutableListAdapter;
 
 public class AibolitChatActivity extends Activity {
 
-    @InjectView(R.id.messageEditText)
+    @ViewById
     private EditText messageEditText;
 
-    @InjectView(R.id.symbolsCountTextVew)
+    @ViewById(R.id.symbolsCountTextVew)
     private TextView symbolsCountTextVew;
 
-    @InjectView(R.id.historyListView)
+    @ViewById(R.id.historyListView)
     private ListView historyListView;
 
     @InjectResource(R.string.symbols_count)
@@ -94,10 +94,10 @@ public class AibolitChatActivity extends Activity {
 
     private class LogAdapter extends MutableListAdapter<Message> {
 
-        @InjectView(android.R.id.text1)
+        @ViewById(android.R.id.text1)
         private TextView messageTextView;
 
-        @InjectView(android.R.id.text2)
+        @ViewById(android.R.id.text2)
         private TextView timeTextView;
 
         public LogAdapter(Context context, int layoutId) {
