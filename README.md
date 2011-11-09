@@ -94,6 +94,7 @@ For more details [read documentation][1] or browse code
 Developed By
 ============
 Alexey Danilov - danikula@gmail.com
+Thanks [Aliaksei Latsinnik][3] for logo :)
 
 If you decide to use Aibolit in your project, please, notify me about it :) I'd love to see how widely it is being used.
 
@@ -120,3 +121,4 @@ License
 
  [1]: https://github.com/downloads/danikula/aibolit/javadoc-aibolit-0.1.zip
  [2]: https://github.com/downloads/danikula/aibolit/aibolit-logo.png
+ [3]: http://be.net/toprojectman
