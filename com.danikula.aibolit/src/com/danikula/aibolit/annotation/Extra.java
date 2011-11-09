@@ -31,8 +31,11 @@ import com.danikula.aibolit.Aibolit;
  * Usage:
  * 
  * <pre>
- * &#064;Extra("com.example.application.PhoneNumber")
+ * &#064;Extra(name="com.example.application.PhoneNumber") // required extra
  * private String phoneNumber;
+ *
+ * &#064;Extra(name="com.example.application.FirstName") // not required extra with default value
+ * private String firstName = "undefined";
  * </pre>
  * 
  * </p>

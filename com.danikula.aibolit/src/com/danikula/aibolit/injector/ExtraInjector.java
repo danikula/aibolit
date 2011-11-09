@@ -45,6 +45,8 @@ import com.danikula.aibolit.annotation.Extra;
         }
         Object extraValue = extras != null ? extras.get(extraName) : null;
 //        checkIsFieldAssignable(field, field.getType(), extraValue.getClass());
-        setValue(fieldOwner, field, extraValue);
+        if (extraValue != null) {
+            setValue(fieldOwner, field, extraValue);    
+        }
     }
 }

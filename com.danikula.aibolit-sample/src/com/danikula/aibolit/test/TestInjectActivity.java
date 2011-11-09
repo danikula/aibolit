@@ -48,7 +48,7 @@ public class TestInjectActivity extends Activity {
     // make fields public to simplify unit testing
     
     @Extra(name="name", required=false)
-    private String name;
+    private String name = "undefined";
     
     @InjectService
     private HttpManager httpManager;
