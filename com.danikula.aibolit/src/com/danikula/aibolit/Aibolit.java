@@ -105,6 +105,12 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *     &#064;Resource(R.layout.content)
  *     private View content;
  *     
+ *     &#064;Extra(name="com.example.application.PhoneNumber") // required extra
+ *     private String phoneNumber;
+ *
+ *     &#064;Extra(name="com.example.application.FirstName", required=false) // not required extra with default value
+ *     private String firstName = "undefined";  
+ *     
  *     ...
  * 
  *     &#064;Override
