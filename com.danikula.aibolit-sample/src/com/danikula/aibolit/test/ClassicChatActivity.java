@@ -10,6 +10,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -68,7 +70,16 @@ public class ClassicChatActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(getString(R.string.menu_aibolit)).setIntent(new Intent(this, AibolitChatActivity.class));
-        menu.add(getString(R.string.menu_test)).setIntent(new Intent(this, TestInjectActivity.class));
+        menu.add(getString(R.string.menu_test)).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(ClassicChatActivity.this, TestInjectActivity.class);
+                intent.putExtra("name", "qu");
+                startActivity(intent);
+                return false;
+            }
+        });
         return super.onCreateOptionsMenu(menu);
     }
 

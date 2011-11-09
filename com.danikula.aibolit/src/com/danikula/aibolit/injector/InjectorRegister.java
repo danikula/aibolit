@@ -24,7 +24,8 @@ import java.util.Map;
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.ServicesResolver;
 import com.danikula.aibolit.Validate;
-import com.danikula.aibolit.annotation.StringArrayAdapter;
+import com.danikula.aibolit.annotation.Extra;
+import com.danikula.aibolit.annotation.InjectService;
 import com.danikula.aibolit.annotation.OnCheckedChange;
 import com.danikula.aibolit.annotation.OnClick;
 import com.danikula.aibolit.annotation.OnCreateContextMenu;
@@ -38,7 +39,7 @@ import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
 import com.danikula.aibolit.annotation.OnTextChanged;
 import com.danikula.aibolit.annotation.OnTouch;
 import com.danikula.aibolit.annotation.Resource;
-import com.danikula.aibolit.annotation.InjectService;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 
@@ -52,6 +53,7 @@ public class InjectorRegister {
         INJECTORS_REGISTER = new HashMap<Class<? extends Annotation>, AbstractInjector<?>>();
 
         INJECTORS_REGISTER.put(ViewById.class, new ViewByIdInjector());
+        INJECTORS_REGISTER.put(Extra.class, new ExtraInjector());
         INJECTORS_REGISTER.put(Resource.class, new ResourceInjector());
         INJECTORS_REGISTER.put(StringArrayAdapter.class, new ArrayAdapterInjector());
         INJECTORS_REGISTER.put(SystemService.class, new SystemServiceInjector());

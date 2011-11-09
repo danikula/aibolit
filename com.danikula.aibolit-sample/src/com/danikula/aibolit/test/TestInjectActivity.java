@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.danikula.aibolit.Aibolit;
 import com.danikula.aibolit.annotation.AibolitSettings;
+import com.danikula.aibolit.annotation.Extra;
 import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.OnCheckedChange;
 import com.danikula.aibolit.annotation.OnClick;
@@ -45,6 +46,9 @@ import com.danikula.aibolit.test.AibolitTestApplication.HttpManager;
 
 public class TestInjectActivity extends Activity {
     // make fields public to simplify unit testing
+    
+    @Extra(name="name", required=false)
+    private String name;
     
     @InjectService
     private HttpManager httpManager;
@@ -118,6 +122,7 @@ public class TestInjectActivity extends Activity {
         Log.d("debug", "screenSmall: " + screenSmall);
         Log.d("debug", "fontSize: " + fontSize);
         Log.d("debug", "maxSpeed: " + maxSpeed);
+        Log.d("debug", "name: " + name);
     }
     
     @Override
