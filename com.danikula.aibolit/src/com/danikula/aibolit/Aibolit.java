@@ -24,13 +24,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.Application;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.InflateException;
 import android.view.View;
 
 import com.danikula.aibolit.annotation.AibolitSettings;
-import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.OnCheckedChange;
 import com.danikula.aibolit.annotation.OnClick;
 import com.danikula.aibolit.annotation.OnCreateContextMenu;
@@ -44,7 +44,7 @@ import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
 import com.danikula.aibolit.annotation.OnTextChanged;
 import com.danikula.aibolit.annotation.OnTouch;
 import com.danikula.aibolit.annotation.Resource;
-import com.danikula.aibolit.annotation.InjectService;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.injector.AbstractFieldInjector;
@@ -60,8 +60,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * <li>Application resources (drawable, string, animation, boolean, dimension, integer, array, color) annotated by
  * {@link Resource}.</li>
  * <li>ArrayAdapter annotated by {@link StringArrayAdapter}</li>
- * <li>System services annotated by {@link SystemService}</li>
- * <li>Custom application services annotated by {@link InjectService} and resolved with help {@link ServicesResolver}</li>
+ * <li>System services or custom application services annotated by {@link SystemService}</li>
  * <li>Events handlers annotated by:
  * <ul>
  * <li> {@link OnCheckedChange}</li>
@@ -107,7 +106,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *     
  *     &#064;Extra(name="com.example.application.PhoneNumber") // required extra
  *     private String phoneNumber;
- *
+ * 
  *     &#064;Extra(name="com.example.application.FirstName", required=false) // not required extra with default value
  *     private String firstName = "undefined";  
  *     
@@ -148,55 +147,41 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * }
  * </pre>
  * <p>
- * Aibolit allows to add custom services resolver with help method {@link #addServicesResolver(ServicesResolver)}. It helps to
- * inject custom application services.
- * </p>
- * Typical usage:
+ * To inject custom application service just override {@link Application#getSystemService(String)}:
  * 
  * <pre>
- * public class AibolitApplication extends Application implements InjectionResolver{
- *     
- *     private HttpService httpService = new HttpService();   // custom application service
+ * public class AibolitTestApplication extends Application {
+ * 
+ *     public static final String HTTP_MANAGER = &quot;http_manager&quot;;
+ * 
+ *     private HttpService httpService = new HttpService(); // custom application service
  * 
  *     &#064;Override
- *     public void onCreate() {
- *         super.onCreate();
- *         
- *         Aibolit.addInjectionResolver(this);
- *     }
- *     
- *     // resolve application service
- *     &#064;Override
- *     public Object resolve(Class<?> serviceClass) {
- *         Object service = null;
- *         if (HttpManager.class.isAssignableFrom(serviceClass)) {
- *             service = getHttpManager();
- *         }else if (...) { // resolve another custom services
- *             // service = ... 
- *         } else {
- *             throw new IllegalArgumentException("Impossible to resolve service with class " + serviceClass.getClass().getName());
+ *     public Object getSystemService(String name) {
+ *         if (HTTP_MANAGER.equals(name)) {
+ *             return getHttpManager();
  *         }
- *         return service;
+ *         else {
+ *             return super.getSystemService(name);
+ *         }
  *     }
- * 
- *     ...
  * }
  * 
  * // then you can use HttpService anywhere you want:
  * 
  * public class AibolitChatActivity extends Activity {
  * 
- *     &#064;InjectService
- *     private HttpService httpService;  // inject service
- *     
+ *     &#064;SystemService(AibolitTestApplication.HTTP_MANAGER)
+ *     private HttpManager httpManager;
+ * 
  *     &#064;Override
  *     public void onCreate(Bundle savedInstanceState) {
  *         super.onCreate(savedInstanceState);
  * 
  *         setContentView(R.layout.chat_activity);
  *         Aibolit.doInjections(this);
- *         
- *         httpService.doRequest();   // use injected service
+ * 
+ *         httpService.doRequest(); // use injected service
  *     }
  * }
  * 
@@ -375,15 +360,6 @@ public class Aibolit {
     public static void setInjectedContentView(Dialog dialog, View contentView) {
         dialog.setContentView(contentView);
         doInjections(dialog);
-    }
-
-    /**
-     * Adds resolver for custom application services.
-     * 
-     * @param injectionResolver InjectionResolver resolver to be used for resolving concrete service by class
-     */
-    public static void addServicesResolver(ServicesResolver injectionResolver) {
-        InjectorRegister.addServicesResolver(injectionResolver);
     }
 
     public static void doInjections(Object patient, InjectionContext injectionContext) {

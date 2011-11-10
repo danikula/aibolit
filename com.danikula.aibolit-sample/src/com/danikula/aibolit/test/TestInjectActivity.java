@@ -27,7 +27,6 @@ import android.widget.TextView;
 import com.danikula.aibolit.Aibolit;
 import com.danikula.aibolit.annotation.AibolitSettings;
 import com.danikula.aibolit.annotation.Extra;
-import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.OnCheckedChange;
 import com.danikula.aibolit.annotation.OnClick;
 import com.danikula.aibolit.annotation.OnFocusChange;
@@ -39,7 +38,7 @@ import com.danikula.aibolit.annotation.OnRadioGroupCheckedChange;
 import com.danikula.aibolit.annotation.OnTextChanged;
 import com.danikula.aibolit.annotation.OnTouch;
 import com.danikula.aibolit.annotation.Resource;
-import com.danikula.aibolit.annotation.InjectService;
+import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.test.AibolitTestApplication.HttpManager;
@@ -50,7 +49,7 @@ public class TestInjectActivity extends Activity {
     @Extra(name="name", required=false)
     private String name = "undefined";
     
-    @InjectService
+    @SystemService(AibolitTestApplication.HTTP_MANAGER)
     private HttpManager httpManager;
 
     @ViewById(R.id.textView)

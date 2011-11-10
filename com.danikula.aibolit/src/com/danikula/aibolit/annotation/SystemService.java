@@ -33,6 +33,9 @@ import com.danikula.aibolit.Aibolit;
  * <pre>
  * &#064;SystemService(Context.NOTIFICATION_SERVICE)
  * private NotificationManager notificationManager;
+ * 
+ * &#064;SystemService("http_manager") // inject custom application service
+ * private HttpManager httpManager;
  * </pre>
  * 
  * </p>

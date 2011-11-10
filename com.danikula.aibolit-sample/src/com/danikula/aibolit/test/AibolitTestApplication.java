@@ -2,10 +2,9 @@ package com.danikula.aibolit.test;
 
 import android.app.Application;
 
-import com.danikula.aibolit.Aibolit;
-import com.danikula.aibolit.ServicesResolver;
-
-public class AibolitTestApplication extends Application implements ServicesResolver{
+public class AibolitTestApplication extends Application {
+    
+    public static final String HTTP_MANAGER = "http_manager";
     
     private HttpManager httpManager;
 
@@ -13,17 +12,15 @@ public class AibolitTestApplication extends Application implements ServicesResol
     public void onCreate() {
         super.onCreate();
         
-        Aibolit.addServicesResolver(this);
     }
     
     @Override
-    public Object resolve(Class<?> serviceClass) {
-        Object service = null;
-        if (HttpManager.class.isAssignableFrom(serviceClass)) {
-            service = getHttpManager();
+    public Object getSystemService(String name) {
+        if (HTTP_MANAGER.equals(name)) {
+            return getHttpManager();
+        } else {
+            return super.getSystemService(name);    
         }
-        // else if (...) {...} resolve all custom services
-        return service;
     }
     
     private HttpManager getHttpManager() {

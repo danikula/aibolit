@@ -16,9 +16,6 @@
 package com.danikula.aibolit.injector;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import android.content.Context;
 
@@ -34,35 +31,14 @@ import com.danikula.aibolit.annotation.SystemService;
  */
 /* package private */class SystemServiceInjector extends AbstractFieldInjector<SystemService> {
 
-    // @formatter:off
-    private static final Set<String> SUPPORTED_SERVICES = new HashSet<String>(Arrays.asList(
-            Context.WINDOW_SERVICE,
-            Context.LAYOUT_INFLATER_SERVICE,
-            Context.ACTIVITY_SERVICE,
-            Context.POWER_SERVICE,
-            Context.ALARM_SERVICE,
-            Context.NOTIFICATION_SERVICE,
-            Context.KEYGUARD_SERVICE,
-            Context.LOCATION_SERVICE,
-            Context.SEARCH_SERVICE,
-            Context.VIBRATOR_SERVICE,
-            Context.CONNECTIVITY_SERVICE,
-            Context.WIFI_SERVICE,
-            Context.INPUT_METHOD_SERVICE
-    ));
-    // @formatter:on
-
     @Override
     public void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, SystemService annotation) {
-        Context context = injectionContext.getAndroidContext();
+        Context context = injectionContext.getAndroidContext().getApplicationContext();
         String serviceName = annotation.value();
-        if (SUPPORTED_SERVICES.contains(serviceName)) {
-            Object service = context.getSystemService(serviceName);
-            setValue(fieldOwner, field, service);
+        Object service = context.getSystemService(serviceName);
+        if (service == null) {
+            throw new InjectingException(String.format("There is no service named '%s'", serviceName));
         }
-        else {
-            String errorPattern = "Can't inject service named '%s'. List of supported services: %s";
-            throw new InjectingException(String.format(errorPattern, serviceName, SUPPORTED_SERVICES));
-        }
+        setValue(fieldOwner, field, service);
     }
 }
