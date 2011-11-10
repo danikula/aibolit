@@ -68,19 +68,11 @@ public class InjectorRegister {
         return INJECTORS_REGISTER.containsKey(annotationClass);
     }
 
-    public static AbstractFieldInjector<Annotation> getFieldInjector(Class<? extends Annotation> annotationClass) {
+    public static AbstractInjector<Annotation> getInjector(Class<? extends Annotation> annotationClass) {
         AbstractInjector<?> abstractInjector = INJECTORS_REGISTER.get(annotationClass);
-        if (!(abstractInjector instanceof AbstractFieldInjector)){
+        if (abstractInjector == null){
             throw new InjectingException("There is no registered AbstractFieldInjector for annotation class "  + annotationClass.getName());
         }
-        return (AbstractFieldInjector<Annotation>) abstractInjector;
-    }
-    
-    public static AbstractMethodInjector<Annotation> getMethodInjector(Class<? extends Annotation> annotationClass) {
-        AbstractInjector<?> abstractInjector = INJECTORS_REGISTER.get(annotationClass);
-        if (!(abstractInjector instanceof AbstractMethodInjector)){
-            throw new InjectingException("There is no registered AbstractMethodInjector for annotation class "  + annotationClass.getName());
-        }
-        return (AbstractMethodInjector<Annotation>) abstractInjector;
+        return (AbstractInjector<Annotation>) abstractInjector;
     }
 }

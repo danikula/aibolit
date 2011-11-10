@@ -16,19 +16,30 @@
 package com.danikula.aibolit.injector;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AccessibleObject;
 
 import android.view.View;
 
 import com.danikula.aibolit.InjectingException;
+import com.danikula.aibolit.InjectionContext;
 
 /**
  * Injects field or method using data from annotation
  * 
  * @author Alexey Danilov
  * 
- * @param <T> type of corresponding annotation
+ * @param <A> type of corresponding annotation
  */
-public abstract class AbstractInjector<T extends Annotation> {
+public abstract class AbstractInjector<A extends Annotation> {
+    
+    /**
+     * Do injection into accessible object
+     * @param targetOwner Objects object that contains accessible object
+     * @param injectionContext InjectionContext object to be used for retrieving information about injection context
+     * @param target AccessibleObject object to be initialized
+     * @param annotation T annotation fir providing data for injection
+     */
+    public abstract void doInjection(Object targetOwner, InjectionContext injectionContext, AccessibleObject target, A annotation);
 
     protected View getViewById(View viewHolder, int viewId) {
         View view = viewHolder.findViewById(viewId);

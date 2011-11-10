@@ -16,6 +16,8 @@
 package com.danikula.aibolit.injector;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.Arrays;
@@ -34,6 +36,16 @@ import com.danikula.aibolit.MethodInvocationHandler;
  * @param <A> type of corresponding annotation
  */
 public abstract class AbstractMethodInjector<A extends Annotation> extends AbstractInjector<A> {
+    
+    /**
+     * {@inheritDoc}
+     */
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, AccessibleObject target, A annotation) {
+        if (!(target instanceof Method)) {
+            throw new InjectingException("Injector applicable only for method injections");
+        }
+        doInjection(methodOwner, injectionContext, (Method) target, annotation);
+    }
 
     /**
      * Injects event handler
@@ -42,8 +54,8 @@ public abstract class AbstractMethodInjector<A extends Annotation> extends Abstr
      * @param sourceMethod method to be invoked as event handler
      * @param annotation T annotation fir providing data for injection
      */
-    public abstract void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, A annotation);
-
+    protected abstract void doInjection(Object methodOwner, InjectionContext injectionContext, Method sourceMethod, A annotation);
+    
     protected void checkIsViewAssignable(Class<? extends View> expectedClass, Class<? extends View> actualClass) {
         if (!expectedClass.isAssignableFrom(actualClass)) {
             String errorPattern = "Injecting is allowable only for view with type %s, but not for %s";

@@ -47,7 +47,7 @@ import com.danikula.aibolit.annotation.Resource;
 import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
-import com.danikula.aibolit.injector.AbstractFieldInjector;
+import com.danikula.aibolit.injector.AbstractInjector;
 import com.danikula.aibolit.injector.AbstractMethodInjector;
 import com.danikula.aibolit.injector.InjectorRegister;
 
@@ -406,7 +406,7 @@ public class Aibolit {
             for (Annotation annotation : annotations) {
                 Class<? extends Annotation> annotationClass = annotation.annotationType();
                 if (InjectorRegister.contains(annotationClass)) {
-                    AbstractFieldInjector<Annotation> injector = InjectorRegister.getFieldInjector(annotationClass);
+                    AbstractInjector<Annotation> injector = InjectorRegister.getInjector(annotationClass);
                     injector.doInjection(holder, injectionContext, field, annotation);
                 }
             }
@@ -419,7 +419,7 @@ public class Aibolit {
             for (Annotation annotation : annotations) {
                 Class<? extends Annotation> annotationClass = annotation.annotationType();
                 if (InjectorRegister.contains(annotationClass)) {
-                    AbstractMethodInjector<Annotation> injector = InjectorRegister.getMethodInjector(annotationClass);
+                    AbstractInjector<Annotation> injector = InjectorRegister.getInjector(annotationClass);
                     injector.doInjection(holder, injectionContext, method, annotation);
                 }
             }

@@ -16,8 +16,8 @@
 package com.danikula.aibolit.injector;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
-
 
 import com.danikula.aibolit.InjectingException;
 import com.danikula.aibolit.InjectionContext;
@@ -32,13 +32,23 @@ import com.danikula.aibolit.InjectionContext;
 public abstract class AbstractFieldInjector<A extends Annotation> extends AbstractInjector<A> {
     
     /**
-     * Injects filed into object
+     * {@inheritDoc}
+     */
+    public void doInjection(Object methodOwner, InjectionContext injectionContext, AccessibleObject target, A annotation) {
+        if (!(target instanceof Field)) {
+            throw new InjectingException("Injector applicable only for filed injections");
+        }
+        doInjection(methodOwner, injectionContext, (Field) target, annotation);
+    }
+    
+    /**
+     * Injects field into object
      * @param fieldOwner Objects object that contain field
      * @param injectionContext InjectionContext object to be used for retrieving information about injection context
      * @param field Filed injected to be initialized
      * @param annotation T annotation fir providing data for injection
      */
-    public abstract void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, A annotation);
+    protected abstract void doInjection(Object fieldOwner, InjectionContext injectionContext, Field field, A annotation);
 
     protected void checkIsFieldAssignable(Field field, Class<?> fieldClass, Class<?> viewClass) {
         if (!fieldClass.isAssignableFrom(viewClass)) {
