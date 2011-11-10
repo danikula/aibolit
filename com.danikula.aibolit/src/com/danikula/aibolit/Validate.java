@@ -37,7 +37,7 @@ public class Validate {
     }
 
     /**
-     * Checks contition on <code>true</code>
+     * Checks condition on <code>true</code>
      * 
      * @param condition boolean condition to check
      * @param message String message of exception to be throwed if condition is not <code>true</code>

@@ -98,7 +98,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *     &#064;SystemService(Context.NOTIFICATION_SERVICE)
  *     private NotificationManager notificationManager;
  *     
- *     &#064;InjectService
+ *     &#064;SystemService(AibolitTestApplication.HTTP_MANAGER)
  *     private HttpManager httpManager;
  *     
  *     &#064;Resource(R.layout.content)
@@ -154,20 +154,27 @@ import com.danikula.aibolit.injector.InjectorRegister;
  * 
  *     public static final String HTTP_MANAGER = &quot;http_manager&quot;;
  * 
- *     private HttpService httpService = new HttpService(); // custom application service
+ *     private HttpManager httpManager = new HttpManager(); // custom application service
  * 
  *     &#064;Override
  *     public Object getSystemService(String name) {
  *         if (HTTP_MANAGER.equals(name)) {
  *             return getHttpManager();
+ *         } 
+ *         // else if (...) {...} // resolve all custom services 
+ *
+ *         return super.getSystemService(name);
+ *     }
+ * 
+ *     private HttpManager getHttpManager() {
+ *         if (httpManager == null) {
+ *             httpManager = new HttpManager();
  *         }
- *         else {
- *             return super.getSystemService(name);
- *         }
+ *         return httpManager;
  *     }
  * }
  * 
- * // then you can use HttpService anywhere you want:
+ * // then you can use HttpManager anywhere you want:
  * 
  * public class AibolitChatActivity extends Activity {
  * 
@@ -181,7 +188,7 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *         setContentView(R.layout.chat_activity);
  *         Aibolit.doInjections(this);
  * 
- *         httpService.doRequest(); // use injected service
+ *         httpManager.doRequest(); // use injected service
  *     }
  * }
  * 

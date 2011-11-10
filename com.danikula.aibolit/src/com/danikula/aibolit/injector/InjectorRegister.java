@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.danikula.aibolit.InjectingException;
-import com.danikula.aibolit.Validate;
 import com.danikula.aibolit.annotation.Extra;
 import com.danikula.aibolit.annotation.OnCheckedChange;
 import com.danikula.aibolit.annotation.OnClick;

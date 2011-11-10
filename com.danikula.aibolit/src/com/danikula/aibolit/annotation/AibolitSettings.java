@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for pass injecting settings into injector. See docs for {@link Aibolit} for more information.
+ * Annotation is used for pass injecting settings into injector. See docs for {@link Aibolit} for more information.
  * <p>
  * Usage:
  * 

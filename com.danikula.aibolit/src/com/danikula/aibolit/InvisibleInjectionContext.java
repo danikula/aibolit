@@ -28,7 +28,7 @@ public class InvisibleInjectionContext implements InjectionContext {
 
     @Override
     public View getRootView() {
-        throw new UnsupportedOperationException(InvisibleInjectionContext.class.getSimpleName() + " do not have visible presentation!");
+        throw new UnsupportedOperationException(getClass().getSimpleName() + " do not have visible presentation!");
     }
 
     @Override

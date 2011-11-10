@@ -25,7 +25,7 @@ import android.view.View.OnKeyListener;
 import com.danikula.aibolit.Aibolit;
 
 /**
- * Anotation is used for injecting extra's value into field. See docs for {@link Aibolit} for more information. Can be used only in Activity.
+ * Annotation is used for injecting extra's value into field. See docs for {@link Aibolit} for more information. Can be used only in Activity.
  * 
  * <p>
  * Usage:
