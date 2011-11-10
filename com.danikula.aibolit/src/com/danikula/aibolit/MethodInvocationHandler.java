@@ -33,7 +33,7 @@ public class MethodInvocationHandler implements InvocationHandler {
     private Method sourceMethod;
 
     /**
-     * Constructs invokation handler. 
+     * Constructs invocation handler. 
      * 
      * @param methodOwner Object object that contains fields or methods that should be injected
      * @param sourceMethod Method method to be called
