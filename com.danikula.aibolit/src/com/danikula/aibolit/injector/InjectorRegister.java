@@ -39,10 +39,10 @@ import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 
 public class InjectorRegister {
-    private static final Map<Class<? extends Annotation>, AbstractInjector<?>> INJECTORS_REGISTER;
+    private static final Map<Class<? extends Annotation>, AbstractInjector<? extends Annotation>> INJECTORS_REGISTER;
 
     static {
-        INJECTORS_REGISTER = new HashMap<Class<? extends Annotation>, AbstractInjector<?>>();
+        INJECTORS_REGISTER = new HashMap<Class<? extends Annotation>, AbstractInjector<? extends Annotation>>();
 
         INJECTORS_REGISTER.put(ViewById.class, new ViewByIdInjector());
         INJECTORS_REGISTER.put(Extra.class, new ExtraInjector());
@@ -69,9 +69,9 @@ public class InjectorRegister {
     }
 
     public static AbstractInjector<Annotation> getInjector(Class<? extends Annotation> annotationClass) {
-        AbstractInjector<?> abstractInjector = INJECTORS_REGISTER.get(annotationClass);
+        AbstractInjector<? extends Annotation> abstractInjector = INJECTORS_REGISTER.get(annotationClass);
         if (abstractInjector == null){
-            throw new InjectingException("There is no registered AbstractFieldInjector for annotation class "  + annotationClass.getName());
+            throw new InjectingException("There is no registered AbstractFieldInjector for annotation "  + annotationClass.getName());
         }
         return (AbstractInjector<Annotation>) abstractInjector;
     }

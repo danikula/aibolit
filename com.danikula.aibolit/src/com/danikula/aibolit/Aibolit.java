@@ -17,8 +17,7 @@
 package com.danikula.aibolit;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
+import java.lang.reflect.AccessibleObject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +47,6 @@ import com.danikula.aibolit.annotation.StringArrayAdapter;
 import com.danikula.aibolit.annotation.SystemService;
 import com.danikula.aibolit.annotation.ViewById;
 import com.danikula.aibolit.injector.AbstractInjector;
-import com.danikula.aibolit.injector.AbstractMethodInjector;
 import com.danikula.aibolit.injector.InjectorRegister;
 
 /**
@@ -160,9 +158,9 @@ import com.danikula.aibolit.injector.InjectorRegister;
  *     public Object getSystemService(String name) {
  *         if (HTTP_MANAGER.equals(name)) {
  *             return getHttpManager();
- *         } 
- *         // else if (...) {...} // resolve all custom services 
- *
+ *         }
+ *         // else if (...) {...} // resolve all custom services
+ * 
  *         return super.getSystemService(name);
  *     }
  * 
@@ -289,8 +287,8 @@ public class Aibolit {
      * </p>
      * 
      * Note: this method is applicable only for injection fields in object without any visible presentation (Service,
-     * BroadcastReceiver, etc...), so you can use it only for injecting fields annotated with {@link InjectService},
-     * {@link SystemService}, {@link Resource}, InjectArrayAdapter
+     * BroadcastReceiver, etc...), so you can use it only for injecting fields annotated with {@link SystemService},
+     * {@link Resource}, {@link StringArrayAdapter}
      * 
      * @param patient Object an object to be processed, can't be <code>null</code>
      * @param context Context android context, can't be <code>null</code>
@@ -369,7 +367,7 @@ public class Aibolit {
         doInjections(dialog);
     }
 
-    public static void doInjections(Object patient, InjectionContext injectionContext) {
+    private static void doInjections(Object patient, InjectionContext injectionContext) {
         Validate.notNull(patient, "Can't inject in null object");
         Validate.notNull(injectionContext, "Can't process null injection context");
 
@@ -377,50 +375,34 @@ public class Aibolit {
         AibolitSettings aibolitSettings = patient.getClass().getAnnotation(AibolitSettings.class);
         boolean injectSuperclasses = aibolitSettings != null && aibolitSettings.injectSuperclasses();
 
-        List<Field> fields = getFieldsList(holderClass, injectSuperclasses);
-        injectFields(patient, injectionContext, fields);
-
-        List<Method> methods = getMethodsList(holderClass, injectSuperclasses);
-        injectMethods(patient, injectionContext, methods);
+        inject(patient, injectionContext, getFieldsList(holderClass, injectSuperclasses));
+        inject(patient, injectionContext, getMethodsList(holderClass, injectSuperclasses));
     }
 
-    private static ArrayList<Field> getFieldsList(Class<?> classToInspect, boolean includeSuperclassFields) {
-        ArrayList<Field> fieldsList = new ArrayList<Field>(Arrays.asList(classToInspect.getDeclaredFields()));
+    private static ArrayList<AccessibleObject> getFieldsList(Class<?> classToInspect, boolean includeSuperclassFields) {
+        ArrayList<AccessibleObject> fields = new ArrayList<AccessibleObject>(Arrays.asList(classToInspect.getDeclaredFields()));
         if (includeSuperclassFields && classToInspect.getSuperclass() != null) {
-            fieldsList.addAll(getFieldsList(classToInspect.getSuperclass(), includeSuperclassFields));
+            fields.addAll(getFieldsList(classToInspect.getSuperclass(), includeSuperclassFields));
         }
-        return fieldsList;
+        return fields;
     }
 
-    private static ArrayList<Method> getMethodsList(Class<?> classToInspect, boolean includeSuperclassFields) {
-        ArrayList<Method> methodsList = new ArrayList<Method>(Arrays.asList(classToInspect.getDeclaredMethods()));
+    private static ArrayList<AccessibleObject> getMethodsList(Class<?> classToInspect, boolean includeSuperclassFields) {
+        ArrayList<AccessibleObject> methods = new ArrayList<AccessibleObject>(Arrays.asList(classToInspect.getDeclaredMethods()));
         if (includeSuperclassFields && classToInspect.getSuperclass() != null) {
-            methodsList.addAll(getMethodsList(classToInspect.getSuperclass(), includeSuperclassFields));
+            methods.addAll(getMethodsList(classToInspect.getSuperclass(), includeSuperclassFields));
         }
-        return methodsList;
+        return methods;
     }
 
-    private static void injectFields(Object holder, InjectionContext injectionContext, List<Field> fields) {
-        for (Field field : fields) {
-            Annotation[] annotations = field.getAnnotations();
+    private static void inject(Object holder, InjectionContext injectionContext, List<AccessibleObject> targets) {
+        for (AccessibleObject target : targets) {
+            Annotation[] annotations = target.getAnnotations();
             for (Annotation annotation : annotations) {
                 Class<? extends Annotation> annotationClass = annotation.annotationType();
                 if (InjectorRegister.contains(annotationClass)) {
                     AbstractInjector<Annotation> injector = InjectorRegister.getInjector(annotationClass);
-                    injector.doInjection(holder, injectionContext, field, annotation);
-                }
-            }
-        }
-    }
-
-    private static void injectMethods(Object holder, InjectionContext injectionContext, List<Method> methods) {
-        for (Method method : methods) {
-            Annotation[] annotations = method.getAnnotations();
-            for (Annotation annotation : annotations) {
-                Class<? extends Annotation> annotationClass = annotation.annotationType();
-                if (InjectorRegister.contains(annotationClass)) {
-                    AbstractInjector<Annotation> injector = InjectorRegister.getInjector(annotationClass);
-                    injector.doInjection(holder, injectionContext, method, annotation);
+                    injector.doInjection(holder, injectionContext, target, annotation);
                 }
             }
         }
