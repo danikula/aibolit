@@ -1,0 +1,53 @@
+def propertyFiles = ['build.properties']
+
+configurations {
+    loadPropertiesFromFiles(propertyFiles)
+    project.version = buildVersion
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.0-milestone-7'
+}
+
+task eclipse(dependsOn: 'clearEclipse') << {
+    project.subprojects.each { subproject ->
+        subproject.tasks.each { task ->
+            if (task.name == 'eclipse') {
+                subproject.tasks['eclipse']
+            }
+        }
+    }  
+}
+
+task clearEclipse << {
+    def eclipseArtifacts = ['.classpath', '.project']
+    project.subprojects.each { subproject ->
+        subproject.tasks.each { task ->
+            if (task.name == 'eclipse') {
+                eclipseArtifacts.each { artifact ->
+                    def artifactFile = new File(subproject.projectDir, artifact)
+                    if (artifactFile.exists()) {
+                        artifactFile.delete();
+                    }
+                }
+            }
+        }
+    }
+}
+
+def loadPropertiesFromFiles(List files) {
+    files.each { propertyFileName ->
+        def propertyFile = new File(rootProject.projectDir, propertyFileName)
+        if(propertyFile.exists()) { 
+            propertyFile.withReader { reader ->
+                def props = new Properties()
+                props.load(reader)
+                props.each { property ->
+                    project.setProperty(property.key, property.value)
+                }
+            }
+        } else {
+            println 'File not found ' + propertyFile
+        }
+    }
+}
