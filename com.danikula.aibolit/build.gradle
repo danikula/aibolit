@@ -7,8 +7,8 @@ dependencies {
     compile files(projectLibsDir.path + '/android4.jar')
 }
 
-build {
-    doFirst{
+compileJava {
+    doFirst {
         rootProject.tasks['downloadLibs'].execute()
     }
 }
