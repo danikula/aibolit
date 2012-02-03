@@ -1,8 +1,7 @@
 def propertyFiles = ['build.properties']
 
 def allDependencies = [
-    'android4.jar', 
-    'commons-collections-3.2.jar'
+    'android4.jar'
 ]
 
 projectLibsDir = new File(rootProject.projectDir, 'lib')
@@ -33,15 +32,8 @@ task downloadLibs << {
     }
 }
 
-task eclipse(dependsOn: 'clearEclipse') << {
-    project.subprojects.each { subproject ->
-        subproject.tasks.each { task ->
-            if (task.name == 'eclipse') {
-                subproject.tasks['eclipse']
-            }
-        }
-    }  
-}
+
+task eclipse(dependsOn: 'clearEclipse')
 
 task clearEclipse << {
     def eclipseArtifacts = ['.classpath', '.project']
