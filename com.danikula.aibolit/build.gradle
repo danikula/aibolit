@@ -4,16 +4,20 @@ apply plugin: 'eclipse'
 version = buildVersion
 
 dependencies {
-    compile files(repositoryPath + '/android4.jar')
+    compile files(projectLibsDir.path + '/android4.jar')
 }
 
-task publish(dependsOn: ['uploadArchives'])
+build {
+    rootProject.tasks['downloadLibs'].execute()
+}
 
 uploadArchives() {
+/*
     dependsOn 'build'
     repositories {
        flatDir {
            dirs repositoryPath
        }
     }
+*/
 }

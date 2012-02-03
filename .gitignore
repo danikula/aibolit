@@ -7,3 +7,5 @@
 /com.danikula.aibolit-sample/.settings
 
 /com.danikula.aibolit/build
+/.gradle
+/com.danikula.aibolit/build

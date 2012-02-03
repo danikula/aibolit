@@ -1,5 +1,12 @@
 def propertyFiles = ['build.properties']
 
+def allDependencies = [
+    'android4.jar', 
+    'commons-collections-3.2.jar'
+]
+
+projectLibsDir = new File(rootProject.projectDir, 'lib')
+
 configurations {
     loadPropertiesFromFiles(propertyFiles)
     project.version = buildVersion
@@ -7,6 +14,23 @@ configurations {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.0-milestone-7'
+}
+
+task downloadLibs << {
+    println 'Downloading libraries...'
+    projectLibsDir.mkdirs()
+    allDependencies.each { library ->
+        def libFile = new File(projectLibsDir, library)
+        if (!libFile.exists()) {
+            def libUrl = remoteRepoSitoryUrl + library
+            println 'Downloading ' + library + ' to ' + libFile + ' from ' + libUrl
+            def tempFile = new File(projectLibsDir, library + '.temp')
+            ant.get(src: libUrl, dest: tempFile.path, verbose:true)
+            tempFile.renameTo(libFile)
+        } else {
+            println 'Skip downloading ' + library + '. It has already exist in local repository'
+        }
+    }
 }
 
 task eclipse(dependsOn: 'clearEclipse') << {
