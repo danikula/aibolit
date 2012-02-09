@@ -1,0 +1,52 @@
+// Android gradle plugin requires 'sdk.dir' or ANDROID_HOME system property.
+ant.setProperty('sdk.dir', androidSdkHome)
+ant.setProperty('target', 'android-4')
+
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath 'org.gradle.api.plugins:gradle-android-plugin:1.1.0'
+  }
+}
+
+apply plugin: 'android'
+apply plugin: 'eclipse'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            // instead of declare dependency on 'android' subproject just add aibolit source set
+            srcDir project(":com.danikula.aibolit").sourceSets.main.allSource
+            srcDir 'scr/main/java'
+        }
+    }
+}
+
+androidSignAndAlign {
+    keyStore = 'debug.keystore'
+    keyAlias = 'androiddebugkey'
+    keyStorePassword = 'android'
+    keyAliasPassword = 'android'
+}
+
+// Configure the filtering of resources with properties from the Gradle's project scope (2)
+processResources {
+  expand (project.properties)
+}
+
+// Configure a dedicated debug build (3)
+task configureDebug << {
+  jar.classifier = "debug"
+}
+
+// Configure a dedicated release build (4)
+task configureRelease << {
+  proguard.enabled = true
+}

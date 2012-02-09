@@ -11,9 +11,15 @@ configurations {
     project.version = buildVersion
 }
 
+allprojects {
+    version = buildVersion
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '1.0-milestone-7'
 }
+
+task build (dependsOn: 'downloadLibs')
 
 task downloadLibs << {
     println 'Downloading libraries...'
@@ -38,14 +44,9 @@ task eclipse(dependsOn: 'clearEclipse')
 task clearEclipse << {
     def eclipseArtifacts = ['.classpath', '.project']
     project.subprojects.each { subproject ->
-        subproject.tasks.each { task ->
-            if (task.name == 'eclipse') {
-                eclipseArtifacts.each { artifact ->
-                    def artifactFile = new File(subproject.projectDir, artifact)
-                    if (artifactFile.exists()) {
-                        artifactFile.delete();
-                    }
-                }
+        subproject.tasks.matching {task -> task.name == 'eclipse'}.all { task ->
+            eclipseArtifacts.each { artifact ->
+                new File(subproject.projectDir, artifact).delete()
             }
         }
     }
