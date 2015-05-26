@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.2.10'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'bintray-release'
+
+dependencies {
+    compile 'com.google.android:android:1.6_r2'
+}
+
+publish {
+    userOrg = 'alexeydanilov'
+    groupId = 'com.danikula'
+    artifactId = 'aibolit'
+    publishVersion = '1.0'
+    description = 'Simple lightweight dependency injection implementation for android'
+    website = 'https://github.com/danikula/aibolit'
+}
